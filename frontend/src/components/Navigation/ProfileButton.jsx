@@ -13,7 +13,7 @@ import SignupFormModal from '../SignupFormModal/SignupFormModal';
 
 const UserList = () => {
     return (
-        <div style={{ color: '#0cefeb', fontSize:'50px', marginTop: '10px'}}>
+        <div style={{ color: '#0cefeb', fontSize:'50px', marginTop: '10px', cursor: 'pointer'}}>
             <PiUserListBold />
         </div>
     );

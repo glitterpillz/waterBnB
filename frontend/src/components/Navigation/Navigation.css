@@ -4,7 +4,7 @@
 .nav-bar {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -74,7 +74,6 @@ button:hover {
     text-decoration: none;
     color: #0CEFEB;
     font-size: 18px;
-    margin-left: 400px;
 }
 
 @media (max-width: 768px) {

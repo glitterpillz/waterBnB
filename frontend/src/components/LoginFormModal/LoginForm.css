@@ -43,8 +43,8 @@ button[disabled] {
 .demo-user {
     font-size: 1.5rem;
     text-align: center;
-    color: #007bff; /* Blue link color */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    color: #007bff;
+    cursor: pointer;
 }
 
 .demo-user:hover {
