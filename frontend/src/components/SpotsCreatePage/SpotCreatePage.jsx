@@ -45,8 +45,8 @@ function SpotCreatePage() {
 
     return (
         <div>
-            <h1>Create a New Spot</h1>
             <form className='create-spot-form' onSubmit={handleSubmit}>
+                <h1>Create a New Spot</h1>  
                 <input
                     type='text'
                     placeholder='Country'
