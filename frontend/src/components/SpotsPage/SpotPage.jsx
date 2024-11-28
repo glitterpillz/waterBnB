@@ -8,7 +8,6 @@ function SpotPage() {
   const [spot, setSpot] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchSpot = async () => {
