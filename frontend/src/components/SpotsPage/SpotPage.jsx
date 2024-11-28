@@ -81,7 +81,9 @@ function SpotPage() {
           <div className='reserve-container'>
             <div className='upper-res-container'>
               <p>${spot.price}/night</p>
-
+            </div>
+            <div className='reserve-btn'>
+              <button type='button'>Reserve</button>
             </div>
           </div>
         </div>

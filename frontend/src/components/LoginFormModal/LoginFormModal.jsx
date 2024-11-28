@@ -84,7 +84,9 @@ function LoginFormModal() {
                     </label>
                     {errors.credential && <p>{errors.credential}</p>}
                     {errors.password && <p>{errors.password}</p>}
-                    <button type='submit' disabled={!isValid()}>Log In</button>
+                    <div className='submit-btn'>
+                        <button type='submit' disabled={!isValid()}>Log In</button>
+                    </div>
                     <br />
                     <a 
                         href='#'

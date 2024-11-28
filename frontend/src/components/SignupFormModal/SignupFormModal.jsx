@@ -135,8 +135,9 @@ function SignupFormModal() {
                     />
                 </label>
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-
-                <button type='submit' disabled={!isValid()}>Sign Up</button>
+                <div className='submit-btn'>
+                    <button type='submit' disabled={!isValid()}>Sign Up</button>
+                </div>
             </form>
         </div>
     );
