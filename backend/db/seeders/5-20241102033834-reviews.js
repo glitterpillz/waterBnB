@@ -14,7 +14,7 @@ module.exports = {
         {
           userId: 9,
           spotId: 1,
-          review: "This farmhouse is adorable! The mountain views were breathtaking, and it felt so peaceful.",
+          review: "This farmhouse is so adorable! The mountain views were breathtaking, and it felt so peaceful.",
           stars: 5,
         },
         {
