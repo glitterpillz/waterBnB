@@ -8,6 +8,7 @@ function SpotPage() {
   const [spot, setSpot] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchSpot = async () => {
@@ -18,6 +19,14 @@ function SpotPage() {
         }
         const data = await response.json();
         setSpot(data);
+
+        // const reviewsResponse = await fetch (`/api/spots/${spotId}/reviews`);
+        // if (!reviewsResponse.ok) {
+        //   throw new Error('Failed to fetch reviews');
+        // }
+        // const reviewData = await reviewsResponse.json();
+        // console.log(reviewData);
+        // setReviews(reviewData);
       } catch (err) {
         setError('Failed to load spot: ' + err.message);
       } finally {
@@ -40,9 +49,19 @@ function SpotPage() {
     return <div>No spot found for ID: {spotId}</div>;
   }
 
+  // function getReviews() {
+  //   reviews.forEach((review) => {
+  //     console.log(review.stars)
+  //   })
+  // }
+
+  // console.log(getReviews(reviews))
+  
+
   return (
     <div className='spot-container'>
         <h1 className='spot-header'>{spot.name}</h1>
+        <h3 className='location-header'>{spot.city}, {spot.state}, {spot.country}</h3>
         <div className='image-container'>
           <div className='preview-image-container'>
               <img src={spot.previewImage} alt={spot.name} />
@@ -54,9 +73,17 @@ function SpotPage() {
               ))}
           </div>
         </div>
-
-        <div className="spot-details">
+        <div className='spot-details-container'>
+          <div className='description-container'>
+            <h2 className='hosted'>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
             <p>{spot.description}</p>
+          </div>
+          <div className='reserve-container'>
+            <div className='upper-res-container'>
+              <p>${spot.price}/night</p>
+
+            </div>
+          </div>
         </div>
     </div>
   );

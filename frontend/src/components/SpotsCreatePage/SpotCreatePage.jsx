@@ -23,7 +23,7 @@ function SpotCreatePage() {
     const [images, setImages] = useState(['', '', '', '']);
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
         const spotData = {
@@ -40,7 +40,7 @@ function SpotCreatePage() {
             images
         };
 
-        await dispatch(sessionActions.createUserSpot(spotData));
+        dispatch(sessionActions.createUserSpot(spotData));
     };
 
     return (

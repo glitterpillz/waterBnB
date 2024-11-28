@@ -1,11 +1,18 @@
 .spot-container {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .spot-header {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.location-header {
+    margin-bottom: 0.5rem;
 }
 
 .image-container {
@@ -26,4 +33,5 @@
     height: auto;
     object-fit: cover;
     border: 1px solid #ccc;
+    border-radius: 5px;
 }

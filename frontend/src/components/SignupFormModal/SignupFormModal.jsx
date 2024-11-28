@@ -17,10 +17,32 @@ function SignupFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
+    const isValid = () => {
+        return (
+            email.trim() &&
+            username.trim() &&
+            firstName.trim() &&
+            lastName.trim() &&
+            password.trim() &&
+            confirmPassword.trim() &&
+            username.length >= 4 &&
+            password.length >= 6
+        );
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        setErrors({});
 
-        if (password === confirmPassword) {
+        if (!isValid()) {
+            setErrors({
+                username: username.length < 4 ? 'Username must be at least 4 characters long' : '',
+                password: password.length < 6 ? 'Password must be at least 6 characters long' : '',
+            });
+            return;
+        }
+
+        if (isValid() && password === confirmPassword) {
             setErrors({});
             return dispatch(
                 sessionActions.signup({
@@ -33,13 +55,19 @@ function SignupFormModal() {
             ).then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
+                
                 if (data?.errors) {
-                    setErrors(data.errors);
+                    setErrors((prevErrors) => ({
+                        ...prevErrors,
+                        ...data.errors,
+                    }));
                 }
             });
         }
         return setErrors({
-            confirmPassword: 'Passwords must match'
+            email: 'The provided email is invalid',
+            username: 'Username must be unique',
+            confirmPassword: 'Passwords must match',
         });
     };
 
@@ -108,7 +136,7 @@ function SignupFormModal() {
                 </label>
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
 
-                <button type='submit'>Sign Up</button>
+                <button type='submit' disabled={!isValid()}>Sign Up</button>
             </form>
         </div>
     );

@@ -33,7 +33,11 @@ function SpotDetails() {
             {spots.length > 0 ? (
     spots.map((spot) => {
       return (
-        <div key={spot.id} className='spot-card'>
+        <div
+          key={spot.id}
+          className='spot-card'
+          title={spot.name}
+        >
           <Link to={`/spots/${spot.id}`}>
             <img src={spot.previewImage} alt={spot.name} className='spot-image' />
             <div className='spot-details'>
