@@ -110,10 +110,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       description: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(500),
         allowNull: false,
         validate: {
-          len: [1, 255],
+          len: [1, 500],
         },
       },
       price: {
