@@ -4,7 +4,7 @@ import * as sessionActions from '../../store/session';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { PiUserListBold } from "react-icons/pi";
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import OpenModalButton from './OpenModalButton'
 import LoginFormModal from '../LoginFormModal/LoginFormModal';
@@ -20,6 +20,7 @@ const UserList = () => {
 };
 
 function ProfileButton({ user }) {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
@@ -49,6 +50,7 @@ function ProfileButton({ user }) {
         e.preventDefault();
         dispatch(sessionActions.logout());
         closeMenu();
+        navigate('/');
     };
 
     const ulClassName = 'profile-dropdown' + (showMenu ? "" : " hidden");
