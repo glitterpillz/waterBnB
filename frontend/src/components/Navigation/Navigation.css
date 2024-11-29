@@ -76,6 +76,12 @@ button:hover {
     font-size: 18px;
 }
 
+.create-profile-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 @media (max-width: 768px) {
     ul {
         flex-wrap: wrap;
