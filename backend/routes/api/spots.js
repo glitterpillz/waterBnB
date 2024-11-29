@@ -405,43 +405,7 @@ router.post(
       .withMessage("Price per day must be a positive number"),
     handleValidationErrors,
   ],
-  // async (req, res) => {
-  //   try {
-  //     const {
-  //       address,
-  //       city,
-  //       state,
-  //       country,
-  //       lat,
-  //       lng,
-  //       name,
-  //       description,
-  //       price,
-  //     } = req.body;
 
-  //     const userId = req.user.id;
-
-  //     const newSpot = await Spot.create({
-  //       ownerId: userId,
-  //       address,
-  //       city,
-  //       state,
-  //       country,
-  //       lat,
-  //       lng,
-  //       name,
-  //       description,
-  //       price,
-  //     });
-
-  //     res.status(201).json(newSpot);
-  //   } catch (err) {
-  //     console.error("Error creating spot:", err);
-  //     res.status(500).json({
-  //       message: "Error creating spot",
-  //     });
-  //   }
-  // }
   async (req, res) => {
     try {
       const {
