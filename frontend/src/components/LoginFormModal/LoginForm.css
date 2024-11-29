@@ -4,14 +4,14 @@
     box-sizing: border-box;
 }
 
-#login-container {
+.login-container {
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#login-form {
+.login-form {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -25,11 +25,15 @@
 }
 
 
-#login-form h1 {
+.login-form h1 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 2rem;
     color: #333
+}
+
+.login-form p {
+    color: red;
 }
 
 .submit-btn button[disabled] {

@@ -1,17 +1,22 @@
 .spots-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    justify-content: center; /* Ensures the grid items are centered */
+    align-items: start; /* Aligns the items to the top */
     margin: 20px;
+    max-width: 1200px; /* Optional: limits the overall container width for better layout */
+    margin-left: auto; /* Centers the container horizontally */
+    margin-right: auto; /* Centers the container horizontally */
 }
 
-
 .spot-card {
-    width: calc(25% - 20px); /* adjusts the width for responsive columns */
-    margin: 10px;
+    max-width: 300px; /* Prevent cards from stretching too wide */
+    width: 100%; /* Ensures cards adapt within the grid */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 @media (max-width: 1000px) {
@@ -26,8 +31,9 @@
     }
 }
 
+
 .spot-card:hover {
-    transform: translateY(-5px)
+    transform: translateY(-5px);
 }
 
 .spot-image {
@@ -57,7 +63,6 @@
     color: #4CAF50;
     margin-top: 10px;
 }
-
 
 .spot-rating {
     font-size: 14px;

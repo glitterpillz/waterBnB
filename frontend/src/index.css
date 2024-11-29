@@ -22,12 +22,6 @@ form input {
     width: 100%;
 }
 
-form p {
-    color: red;
-    font-size: 0.875rem;
-    margin-bottom: 10px;
-}
-
 form button {
     padding: 10px;
     background-color: #0cefeb;

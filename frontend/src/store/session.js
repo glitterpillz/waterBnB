@@ -5,6 +5,7 @@ const REMOVE_USER = 'session/removeUser';
 const SIGNUP_USER = 'users/signupUser';
 const GET_USER_SPOTS = 'session/getUserSpots';
 const CREATE_USER_SPOT = 'session/createUserSpot'
+const DELETE_USER_SPOT = 'session/deleteSpot'
 
 
 const setUser = (user) => {
@@ -24,8 +25,8 @@ const setUserSpots = (spots) => {
     return {
         type: GET_USER_SPOTS,
         payload: spots
-    }
-}
+    };
+};
 
 const addUserSpot = (spot) => {
     return {
@@ -33,6 +34,14 @@ const addUserSpot = (spot) => {
         payload: spot
     };
 };
+
+const deleteSpot = (spotId) => {
+    return {
+        type: DELETE_USER_SPOT,
+        payload: spotId
+    };
+};
+
 
 export const restoreUser = () => async (dispatch) => {
     const response = await csrfFetch('/api/session');
@@ -93,7 +102,7 @@ export const getUserSpots = () => async (dispatch) => {
 }
 
 export const createUserSpot = (spotData) => async (dispatch) => {
-    const response = await csrfFetch('/api/spots', {
+    const response = await csrfFetch('/api/spots/', {
         method: 'POST',
         body: JSON.stringify(spotData)
     });
@@ -102,6 +111,18 @@ export const createUserSpot = (spotData) => async (dispatch) => {
         dispatch(addUserSpot(data.Spot))
     }
     return response
+}
+
+export const deleteUserSpot = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+    });
+
+    if (response.ok) {
+        dispatch(deleteSpot(spotId));
+    }
+
+    return response;
 }
 
 const initialState = { 
@@ -124,7 +145,12 @@ const sessionReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userSpots: [...state.userSpots, action.payload]
-            };    
+            };
+        case DELETE_USER_SPOT:
+            return {
+                ...state,
+                userSpots: state.userSpots.filter(spot => spot.id !== action.payload)
+            };          
         default:
             return state;
     }

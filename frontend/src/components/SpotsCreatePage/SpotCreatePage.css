@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    color: black
 }
 
 h1 {
@@ -69,4 +70,8 @@ h1 {
 
 .price-input p {
     font-size: 1.5rem;
+}
+
+.error {
+    color: red;
 }
