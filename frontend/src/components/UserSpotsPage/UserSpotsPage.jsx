@@ -25,6 +25,10 @@ function UserSpotsPage() {
         }
     }
 
+    const handleUpdate = (spotId) => {
+        navigate(`/user/spots/${spotId}/edit`)
+    }
+
     if (!userSpots.length) {
         return <p>You have no spots yet.</p>;
     }
@@ -55,7 +59,13 @@ function UserSpotsPage() {
                                     </div>
                                 </Link>
                                 <div className='user-spot-btns'>
-                                    <button type='button' className='spot-update-btn'>Update</button>
+                                    <button 
+                                        type='button' 
+                                        className='spot-update-btn'
+                                        onClick={() => handleUpdate(spot.id)}
+                                    >
+                                        Update
+                                    </button>
                                     <button 
                                         type='button' 
                                         className='spot-delete-btn' 
