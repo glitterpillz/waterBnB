@@ -1,30 +1,25 @@
-import './SpotCreatePage.css';
-
 import * as sessionActions from '../../store/session';
-
 import { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-
-function SpotCreatePage() {
+const EditSpotForm = ({ spot }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
-    const [country, setCountry] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [lat, setLat] = useState('');
-    const [lng, setLng] = useState('');
-    const [description, setDescription] = useState('');
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [previewImage, setPreviewImage] = useState('');
-    const [images, setImages] = useState(['', '', '', '']);
+    const [country, setCountry] = useState(spot.country);
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [lat, setLat] = useState(spot.lat);
+    const [lng, setLng] = useState(spot.lng);
+    const [description, setDescription] = useState(spot.description);
+    const [name, setName] = useState(spot.name);
+    const [price, setPrice] = useState(spot.price);
+    const [previewImage, setPreviewImage] = useState(spot.previewImage);
+    const [images, setImages] = useState(spot.images);
     const [errors, setErrors] = useState({});
-
+    
     const validateForm = () => {
         const errors = {};
         if (!country) errors.country = 'Country is required';
@@ -38,7 +33,7 @@ function SpotCreatePage() {
         if (!price) errors.price = 'Price is required';
         if (!previewImage) errors.previewImage = 'Preview image is required'
         if (images.some((image) => image && !isValidUrl(image))) errors.images = 'Image URL must end in .png, .jpg, or .jpeg';
-    
+        
         setErrors(errors);
         return Object.keys(errors).length === 0;
     }
@@ -47,7 +42,6 @@ function SpotCreatePage() {
         const regex = /^(ftp|http|https):\/\/[^ "]+$/;
         return regex.test(url);
     }
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -70,21 +64,21 @@ function SpotCreatePage() {
             images
         };
 
-        dispatch(sessionActions.createUserSpot(spotData))
+        dispatch(sessionActions.editUserSpot(spotData))
             .then((response) => {
                 if (response?.spot?.id) {
                     navigate(`/spots/${response.spot.id}`);
                 }
             })
             .catch((error) => {
-                alert('An error occurred while creating the spot.', error);
-            });
-    };  
+                alert('An error occurred while updating your spot.', error)
+            })
+    };
 
     return (
         <div>
-            <form className='create-spot-form' onSubmit={handleSubmit}>
-                <h1>Create a New Spot</h1>
+            <form className='edit-spot-form' onSubmit={handleSubmit}>
+            <h1>Update Your Spot</h1>
                 <h2>Where&apos;s your place located?</h2>
                 <p>Guests will get your exact address once they booked a reservation.</p>
                 <br />
@@ -224,5 +218,4 @@ function SpotCreatePage() {
     )
 }
 
-
-export default SpotCreatePage;
+export default EditSpotForm;
