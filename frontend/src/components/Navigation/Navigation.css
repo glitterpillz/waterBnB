@@ -85,7 +85,7 @@ button:hover {
 @media (max-width: 768px) {
     ul {
         flex-wrap: wrap;
-        justify-content: center; /* Adjusts alignment for smaller screens */
+        justify-content: center;
     }
 
     li {

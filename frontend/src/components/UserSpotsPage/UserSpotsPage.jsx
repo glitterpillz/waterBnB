@@ -3,6 +3,7 @@ import './UserSpotsPage.css'
 import * as sessionActions from '../../store/session';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 function UserSpotsPage() {
     const dispatch = useDispatch();
@@ -39,22 +40,24 @@ function UserSpotsPage() {
                                 className='spot-card'
                                 title={spot.name}
                             >
-                                <img src={spot.previewImage} alt={spot.name} className='spot-image' />
-                                <div className='spot-details'>
-                                    <div className='spot-top'>
-                                        <div className='spot-location'>
-                                            {spot.city}, {spot.state}
+                                <Link to={`/spots/${spot.id}`}>
+                                    <img src={spot.previewImage} alt={spot.name} className='spot-image' />
+                                    <div className='spot-details'>
+                                        <div className='spot-top'>
+                                            <div className='spot-location'>
+                                                {spot.city}, {spot.state}
+                                            </div>
+                                            <div className='spot-rating'>⭐ {spot.rating}</div>
                                         </div>
-                                        <div className='spot-rating'>⭐ {spot.rating}</div>
+                                        <div className='spot-price'>${spot.price} night</div>
+                                        <div className='user-spot-btns'>
+                                            <button type='button' className='spot-update-btn'>Update</button>
+                                            <button type='button' className='spot-delete-btn' onClick={() => handleDelete(spot.id)}>
+                                                Delete
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div className='spot-price'>${spot.price} night</div>
-                                    <div className='user-spot-btns'>
-                                        <button type='button' className='spot-update-btn'>Update</button>
-                                        <button type='button' className='spot-delete-btn' onClick={() => handleDelete(spot.id)}>
-                                            Delete
-                                        </button>
-                                    </div>
-                                </div>
+                                </Link>
                             </div>    
                         );
                     })
