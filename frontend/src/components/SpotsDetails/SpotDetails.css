@@ -1,18 +1,18 @@
 .spots-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
     gap: 20px;
-    justify-content: center; /* Ensures the grid items are centered */
-    align-items: start; /* Aligns the items to the top */
+    justify-content: center;
+    align-items: start;
     margin: 20px;
-    max-width: 1200px; /* Optional: limits the overall container width for better layout */
-    margin-left: auto; /* Centers the container horizontally */
-    margin-right: auto; /* Centers the container horizontally */
+    max-width: 1200px; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
 .spot-card {
-    max-width: 300px; /* Prevent cards from stretching too wide */
-    width: 100%; /* Ensures cards adapt within the grid */
+    max-width: 300px;
+    width: 100%; 
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
