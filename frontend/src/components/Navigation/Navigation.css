@@ -83,9 +83,15 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-    ul {
-        flex-wrap: wrap;
-        justify-content: center;
+    .navbar {
+        list-style-type: none;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+        background-image: linear-gradient(to bottom right, #0cefeb, #007573);
     }
 
     li {

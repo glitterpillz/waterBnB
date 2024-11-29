@@ -21,6 +21,7 @@
     gap: 20px;
 }
 
+
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

@@ -134,6 +134,7 @@ export const deleteUserSpot = (spotId) => async (dispatch) => {
     return response;
 }
 
+
 export const editUserSpot = (spotId, updatedSpotData) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
@@ -141,10 +142,13 @@ export const editUserSpot = (spotId, updatedSpotData) => async (dispatch) => {
     });
 
     if (response.ok) {
-        const data = response.json();
-        dispatch(updateSpot(data.Spot));
+        const data = await response.json();
+        dispatch(updateSpot(data.Spot)); 
+        return data.Spot;
     }
-}
+
+    return response;
+};
 
 const initialState = { 
     user: null, 

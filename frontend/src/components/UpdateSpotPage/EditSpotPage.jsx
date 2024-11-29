@@ -23,7 +23,6 @@ function EditSpotPage() {
 
   return (
     <div>
-      <h1>Edit Spot</h1>
       <EditSpotForm spot={spot} setEditingSpot={setSpot} />
     </div>
   );
