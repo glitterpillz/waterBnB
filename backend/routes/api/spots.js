@@ -234,6 +234,8 @@ router.put(
     spotToUpdate.description = description;
     spotToUpdate.price = price;
 
+    await spotToUpdate.save();
+
     res.status(200).json(spotToUpdate);
   }
 );
