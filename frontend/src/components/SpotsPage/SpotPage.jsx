@@ -14,7 +14,7 @@ const GoldStar = () => {
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString(); // You can adjust the format here
+  return date.toLocaleDateString();
 }
 
 function SpotPage() {
@@ -34,16 +34,18 @@ function SpotPage() {
         const data = await response.json();
         setSpot(data);
         setReviews(data.Reviews || []);
-        console.log(data.Reviews);
+        console.log(data.Reviews); 
       } catch (err) {
         setError('Failed to load spot: ' + err.message);
       } finally {
         setIsLoading(false);
       }
     };
-
+  
     fetchSpot();
   }, [spotId]);
+
+  
 
   if (isLoading) {
     return <div>Loading spot...</div>;

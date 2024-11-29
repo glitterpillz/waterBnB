@@ -33,7 +33,7 @@ function EditSpotForm({ spot, setEditingSpot }) {
     dispatch(editUserSpot(spot.id, updatedSpotData));
     setEditingSpot(null);
 
-    navigate(`/spots/${spot.id}`);
+    navigate(`/spots/${spot.id}`)
   };
 
   return (
