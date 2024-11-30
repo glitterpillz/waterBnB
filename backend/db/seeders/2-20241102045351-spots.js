@@ -21,7 +21,7 @@ module.exports = {
             name: "Cozy Farmhouse",
             description: "Escape to this charming farmhouse in Pelican Town, surrounded by lush farmland and mountain views. Enjoy cozy interiors, a spacious kitchen, and a peaceful porch for relaxing. Explore nearby nature trails, visit local markets, or unwind in the serene countryside atmosphere. This rustic retreat is ideal for those seeking tranquility and scenic beauty in the heart of the Valley.",
             price: 120,
-            previewImage: "https://i.ibb.co/xLjRh5F/standard-house.png"
+            previewImage: "https://i.ibb.co/xHT5MJT/standard-house.png"
           },
           {
             ownerId: 2,
@@ -34,7 +34,7 @@ module.exports = {
             name: "Forest Retreat",
             description: "Nestled in Cindersap Forest, this enchanting cabin offers a tranquil escape surrounded by towering trees. Relax by the fireplace or enjoy the cozy interiors after a day of exploring forest trails. Perfect for nature lovers, it’s a great spot for birdwatching, stargazing, or unwinding with a good book. The serene setting and rustic charm make it a perfect peaceful retreat.",
             price: 95,
-            previewImage: "https://i.ibb.co/c2wmtG3/forest-house.png"
+            previewImage: "https://i.ibb.co/DkPrtJ5/forest-house.png"
           },
           {
             ownerId: 3,
@@ -47,7 +47,7 @@ module.exports = {
             name: "Riverbank Cottage",
             description: "This riverside cottage in Pelican Town provides a serene escape with picturesque water views. Enjoy fishing, peaceful riverside walks, or relaxing in the cozy interiors. Featuring a welcoming living space and outdoor seating, it’s perfect for quiet reflection or quality time with loved ones. Ideal for a restful vacation surrounded by nature’s beauty.",
             price: 140,
-            previewImage: "https://i.ibb.co/ZJkzC4y/river-house.png"
+            previewImage: "https://i.ibb.co/XSy7w92/river-house.png"
           },
           {
             ownerId: 4,
@@ -60,7 +60,7 @@ module.exports = {
             name: "Stardrop Hill Retreat",
             description: "Located on Stardrop Hill, this retreat offers breathtaking views of starry skies and lush landscapes. The home features modern comforts, a spacious deck, and access to nearby trails. Relax in the peaceful mountain setting, enjoy stargazing, or explore the natural beauty of the Valley. A perfect getaway for those seeking serenity and adventure.",
             price: 190,
-            previewImage: "https://i.ibb.co/DLq05yK/hilltop-house.png"
+            previewImage: "https://i.ibb.co/HrTkDct/hilltop-farm.jpg"
           },
           {
             ownerId: 5,
@@ -73,7 +73,7 @@ module.exports = {
             name: "Seaside Getaway",
             description: "Set along Pelican Town’s coastline, this beachfront home offers stunning ocean views and a private dock. Enjoy beachside relaxation, water activities, and cozy indoor comforts. The airy interiors and outdoor spaces provide the perfect setting for unwinding by the sea. Great for families or couples looking for a coastal retreat with plenty of charm.",
             price: 220,
-            previewImage: "https://i.ibb.co/7VVzdVS/beach-house.png"
+            previewImage: "https://i.ibb.co/mF09LxD/beach-farm.jpg"
           },
 
 
