@@ -134,7 +134,6 @@ export const deleteUserSpot = (spotId) => async (dispatch) => {
     return response;
 }
 
-
 export const editUserSpot = (spotId, updatedSpotData) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'PUT',
@@ -142,13 +141,12 @@ export const editUserSpot = (spotId, updatedSpotData) => async (dispatch) => {
     });
 
     if (response.ok) {
-        const data = await response.json();
-        dispatch(updateSpot(data.Spot)); 
-        return data.Spot;
+        const data = response.json();
+        dispatch(updateSpot(data.Spot));
     }
 
     return response;
-};
+}
 
 const initialState = { 
     user: null, 
@@ -180,9 +178,9 @@ const sessionReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userSpots: state.userSpots.map((spot) =>
-                    spot.id === action.payload.id ? action.payload : spot
+                  action.payload && spot.id === action.payload.id ? action.payload : spot
                 ),
-            };          
+              };          
         default:
             return state;
     }
