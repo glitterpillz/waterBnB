@@ -3,6 +3,7 @@ import './SpotPage.css'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
+import AddReviewModal from '../SpotReviewModal/SpotReviewModal';
 
 const GoldStar = () => {
   return (
@@ -23,6 +24,7 @@ function SpotPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchSpot = async () => {
@@ -87,9 +89,14 @@ function SpotPage() {
           </div>
           <div className='reserve-container'>
             <div className='upper-res-container'>
-              <p>${spot.price}/night</p>
-              <GoldStar /> {avgRating}
-              <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+              <div className='spot-price-box'>
+                <p>${spot.price} / night</p>
+              </div>
+              <div className='rating-reviews'>
+                <GoldStar /> {avgRating} 
+                <span> · </span>
+                <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+              </div>
             </div>
             <div className='reserve-btn'>
               <button type='button' onClick={() => alert('Feature coming soon')}>
@@ -107,8 +114,21 @@ function SpotPage() {
           <div className='reviews-header'>
             <GoldStar />
             <h3>{avgRating}</h3>
+            <span> · </span>
             <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
           </div>
+          <div className='post-review-btn'>
+            <button onClick={() => setShowModal(true)}>
+              Post a Review
+            </button>
+            {showModal && (
+              <AddReviewModal
+                spotId={spot.id}
+                closeModal={() => setShowModal(false)}
+              />
+            )}
+          </div>
+          <br />
           {reviews.length > 0 ? (
             reviews.map((review) => (
               <div key={review.id} className='review-card'>

@@ -38,10 +38,15 @@
 }
 
 .spot-details-container {
+    font-size: 18px;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 5fr 3fr;
     margin-top: 20px;
     gap: 20px;
+}
+
+.reserve-btn {
+    width: 50%;
 }
 
 .reserve-btn button {
@@ -49,6 +54,7 @@
     padding: 5px 10px 5px 10px;
     border-radius: 3px;
     color: white;
+    width: 100%;
 }
 
 .reserve-container {
@@ -66,7 +72,16 @@
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+
+.rating-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .reviews-header {

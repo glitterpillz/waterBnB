@@ -7,7 +7,7 @@ const GET_USER_SPOTS = 'session/getUserSpots';
 const CREATE_USER_SPOT = 'session/createUserSpot'
 const DELETE_USER_SPOT = 'session/deleteSpot'
 const UPDATE_USER_SPOT = 'session/updateSpot'
-
+const ADD_REVIEW = 'session/addReview';
 
 const setUser = (user) => {
     return {
@@ -47,9 +47,15 @@ const updateSpot = (spot) => {
     return {
         type: UPDATE_USER_SPOT,
         payload: spot
-    }
-}
+    };
+};
 
+const addReview = (review) => {
+    return {
+        type: ADD_REVIEW,
+        payload: review
+    };
+};
 
 
 export const restoreUser = () => async (dispatch) => {
@@ -148,6 +154,21 @@ export const editUserSpot = (spotId, updatedSpotData) => async (dispatch) => {
     return response;
 }
 
+export const createReview = (spotId, reviewData) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        body: JSON.stringify(reviewData),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addReview(data.review));
+        return data.review;
+    }
+
+    throw new Error('Failed to create review');
+};
+
 const initialState = { 
     user: null, 
     userSpots: []
@@ -180,7 +201,19 @@ const sessionReducer = (state = initialState, action) => {
                 userSpots: state.userSpots.map((spot) =>
                   action.payload && spot.id === action.payload.id ? action.payload : spot
                 ),
-              };          
+              };
+        case ADD_REVIEW:
+            return {
+                ...state,
+                userSpots: state.userSpots.map((spot) =>
+                    spot.id === action.payload.spotId
+                        ? {
+                        ...spot,
+                        Review: [...(spot.Reviews || []), action.payload] 
+                        }
+                    : spot
+                ),
+            }          
         default:
             return state;
     }
