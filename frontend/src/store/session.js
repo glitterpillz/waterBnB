@@ -155,18 +155,27 @@ export const editUserSpot = (spotId, updatedSpotData) => async (dispatch) => {
 }
 
 export const createReview = (spotId, reviewData) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-        method: 'POST',
-        body: JSON.stringify(reviewData),
-    });
+    try {
+        const response = await csrfFetch(`/api/reviews/${spotId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reviewData),
+        });
 
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(addReview(data.review));
-        return data.review;
+        if (response.ok) {
+            const data = await response.json();
+            dispatch(addReview(data.review)); 
+            return data.review;
+        } else {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to create review');
+        }
+    } catch (error) {
+        console.error('Error creating review:', error);
+        throw error;
     }
-
-    throw new Error('Failed to create review');
 };
 
 const initialState = { 
@@ -203,17 +212,17 @@ const sessionReducer = (state = initialState, action) => {
                 ),
               };
         case ADD_REVIEW:
-            return {
-                ...state,
-                userSpots: state.userSpots.map((spot) =>
-                    spot.id === action.payload.spotId
-                        ? {
-                        ...spot,
-                        Review: [...(spot.Reviews || []), action.payload] 
-                        }
-                    : spot
-                ),
-            }          
+        return {
+            ...state,
+            userSpots: state.userSpots.map((spot) =>
+            spot.id === action.payload.spotId
+                ? {
+                    ...spot,
+                    Review: [...(spot.Reviews || []), action.payload],
+                }
+                : spot
+            ),
+        };        
         default:
             return state;
     }
