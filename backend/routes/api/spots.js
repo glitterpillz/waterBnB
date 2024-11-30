@@ -96,7 +96,14 @@ router.get("/:spotId", async (req, res) => {
         {
           model: Review,
           as: "Reviews",
-          attributes: ["id", "review", "stars", "createdAt"], // Include the fields you need from Review
+          attributes: ["id", "review", "stars", "createdAt"],
+          include: [
+            {
+              model: User,
+              as: "User",
+              attributes: ["id", "firstName", "lastName"],
+            },
+          ],
         },
       ],
     });
