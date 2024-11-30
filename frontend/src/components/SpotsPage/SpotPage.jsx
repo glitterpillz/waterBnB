@@ -45,7 +45,11 @@ function SpotPage() {
     fetchSpot();
   }, [spotId]);
 
-  
+  const calculateAvgRating = () => {
+    if (!reviews || reviews.length === 0) return 'New';
+    const totalStars = reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
+    return (totalStars / reviews.length).toFixed(1);
+  }; 
 
   if (isLoading) {
     return <div>Loading spot...</div>;
@@ -58,6 +62,8 @@ function SpotPage() {
   if (!spot) {
     return <div>No spot found for ID: {spotId}</div>;
   }  
+
+  const avgRating = calculateAvgRating();
 
   return (
     <div className='spot-container'>
@@ -82,7 +88,8 @@ function SpotPage() {
           <div className='reserve-container'>
             <div className='upper-res-container'>
               <p>${spot.price}/night</p>
-              <GoldStar />
+              <GoldStar /> {avgRating}
+              <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
             </div>
             <div className='reserve-btn'>
               <button type='button' onClick={() => alert('Feature coming soon')}>
@@ -99,7 +106,7 @@ function SpotPage() {
         <div className='reviews-container'>
           <div className='reviews-header'>
             <GoldStar />
-            <h3>4.5</h3>
+            <h3>{avgRating}</h3>
             <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
           </div>
           {reviews.length > 0 ? (
@@ -120,7 +127,7 @@ function SpotPage() {
               </div>
             ))
           ) : (
-            <p>No reviews available.</p>
+            <p>Be the first to post a review!</p>
           )}
 
         </div>

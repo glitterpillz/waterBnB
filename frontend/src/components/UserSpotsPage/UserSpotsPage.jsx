@@ -4,10 +4,13 @@ import * as sessionActions from '../../store/session';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
+import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal';
+import { useModal } from '../../context/Modal';
 
 function UserSpotsPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { setModalContent } = useModal();
 
     const userSpots = useSelector((state) => {
         console.log('Redux State:', state);
@@ -19,11 +22,9 @@ function UserSpotsPage() {
     }, [dispatch]);
 
     const handleDelete = (spotId) => {
-        if (window.confirm("Are you sure you want to delete this spot?")) {
-            dispatch(sessionActions.deleteUserSpot(spotId));
-            navigate('/user/spots'); 
-        }
+        setModalContent(<ConfirmDeleteModal spotId={spotId} />);
     }
+
 
     const handleUpdate = (spotId) => {
         navigate(`/user/spots/${spotId}/edit`)

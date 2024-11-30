@@ -136,7 +136,7 @@ function EditSpotForm({ spot, setEditingSpot }) {
           />
         </div>
         <br />
-        <button type="submit">Create Spot</button>
+        <button type="submit">Update Your Spot</button>
       </form>
     </div>
   );

@@ -52,17 +52,6 @@ const router = createBrowserRouter([
         path: '/user/spots/:spotId/edit',
         element: <EditSpotPage />
       }
-
-      // {
-      //   path: '/user/spots',
-      //   element: <UserSpotsPage />,
-      //   children: [
-      //     {
-      //       path: ':spotId/edit',
-      //       element: <EditSpotForm />
-      //     }
-      //   ]
-      // }
     ]
   }
 ]);
