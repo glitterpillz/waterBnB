@@ -81,43 +81,36 @@ router.get("/:spotId", async (req, res) => {
   try {
     const spotId = req.params.spotId;
 
-    const spot = await Spot.findOne({
-      where: { id: spotId },
+    const spot = await Spot.findByPk(spotId, {
       include: [
         {
-          model: Review,
-          include: [
-            {
-              model: User,
-              attributes: ["id", "firstName", "lastName"],
-            },
-            {
-              model: ReviewImage,
-              as: "ReviewImages",
-              attributes: ["id", "url"],
-            },
-          ],
-        },
-        {
           model: SpotImage,
-          attributes: ["id", "url"],
+          as: "SpotImages",
+          attributes: ["id", "url", "preview"],
         },
         {
           model: User,
           as: "Owner",
-          attributes: ["firstName", "lastName"],
+          attributes: ["id", "firstName", "lastName"],
+        },
+        {
+          model: Review,
+          as: "Reviews",
+          attributes: ["id", "review", "stars", "createdAt"], // Include the fields you need from Review
         },
       ],
     });
 
     if (!spot) {
-      return res.status(404).json({ message: "Spot couldn't be found" });
+      return res.status(404).json({
+        message: "Spot couldn't be found",
+      });
     }
 
-    res.json(spot); 
+    res.status(200).json(spot);
   } catch (err) {
-    console.error("Error getting spot: ", err);
-    res.status(500).json({ message: "Error getting spot" });
+    console.error("Error fetching spot details: ", err);
+    res.status(500).json({ message: "Error fetching spot details" });
   }
 });
 
@@ -248,6 +241,7 @@ router.put(
     spotToUpdate.name = name;
     spotToUpdate.description = description;
     spotToUpdate.price = price;
+
 
     await spotToUpdate.save();
 
