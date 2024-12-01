@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.review-modal-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 40px;
+}
+
+.add-review-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.star-rating {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.star-icon {
+    font-size: 24px;
+    color: gray;
+}
+
+.star-icon.filled {
+    color: gold;
+}
+
+.star-icon:hover {
+    color: gold;
+}
+
+.review-modal-btns {
+    display: flex;
+    gap: 20px;
+}

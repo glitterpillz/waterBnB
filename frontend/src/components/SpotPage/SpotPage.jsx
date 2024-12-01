@@ -117,7 +117,7 @@ function SpotPage() {
             <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
           </div>
           <div className='post-review-btn'>
-            <SpotReviewButton spot={spot}/>
+            <SpotReviewButton spot={spot} />
           </div>
           <br />
           {reviews.length > 0 ? (

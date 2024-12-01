@@ -57,7 +57,7 @@ a {
     padding: 5px 0;
 }
 
-button {
+.nav-bar button {
     background-color: transparent;
     border: none;
     color: white;

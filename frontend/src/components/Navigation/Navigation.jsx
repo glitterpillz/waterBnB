@@ -20,25 +20,25 @@ function Navigation({ isLoaded }) {
 
     return (
         <ul className='nav-bar'>
-        <li>
-            <NavLink to='/' className='home-btn'>
-                <span className='home-container'><WaterDrop /> WaterBnB</span>
-            </NavLink>
-        </li>
-        {sessionUser && (
-            <li className='create-profile-group'>
-                <NavLink to='/spots/new' className='create-spot-btn'>
-                    Create a New Spot
-                </NavLink>
-                <ProfileButton className='profile-btn' user={sessionUser} />
-            </li>
-        )}
-        {isLoaded && !sessionUser && (
             <li>
-                <ProfileButton className='profile-btn' user={sessionUser} />
+                <NavLink to='/' className='home-btn'>
+                    <span className='home-container'><WaterDrop /> WaterBnB</span>
+                </NavLink>
             </li>
-        )}
-    </ul>
+            {sessionUser && (
+                <li className='create-profile-group'>
+                    <NavLink to='/spots/new' className='create-spot-btn'>
+                        Create a New Spot
+                    </NavLink>
+                    <ProfileButton className='profile-btn' user={sessionUser} />
+                </li>
+            )}
+            {isLoaded && !sessionUser && (
+                <li>
+                    <ProfileButton className='profile-btn' user={sessionUser} />
+                </li>
+            )}
+        </ul>
     );
 }
 

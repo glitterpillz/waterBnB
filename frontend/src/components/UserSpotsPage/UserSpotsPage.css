@@ -30,6 +30,49 @@
     padding: 10px;
 }
 
+.user-spots-container {
+    display: flex; /* Make the container a flexbox container */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Align items horizontally to the center */
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+  }
+
+/* .user-spots-container h1 {
+    text-align: left;
+    margin-left: 40px;
+    margin-top: 40px;
+} */
+
+.user-spots-container h1 {
+    text-align: left; /* Align text to the left */
+    margin: 0; /* Remove top margin */
+  }
+
+/* .new-spot-btn {
+    background-color: hotpink;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid hotpink;
+    font-size: 20px;
+    margin-left: 40px;
+} */
+
+.new-spot-btn {
+    background-color: hotpink;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    border: none;
+    font-size: 20px;
+}
+
+.new-spot-btn:hover {
+    background-color: pink;
+    color: hotpink;
+}
+
 .user-spot-btns {
     display: flex;
     gap: 10px;

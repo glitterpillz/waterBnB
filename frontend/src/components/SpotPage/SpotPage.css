@@ -50,11 +50,18 @@
 }
 
 .reserve-btn button {
-    background-color: hotpink;
-    padding: 5px 10px 5px 10px;
-    border-radius: 3px;
-    color: white;
     width: 100%;
+    background-color: hotpink;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid hotpink;
+    font-size: 20px;
+}
+
+
+.reserve-btn button:hover {
+    background-color: pink;
+    color: hotpink;
 }
 
 .reserve-container {
@@ -113,4 +120,17 @@
 .review-date {
     font-size: 14px;
     color: gray;
+}
+
+.post-review-btn button {
+    background-color: hotpink;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid hotpink;
+    font-size: 20px;
+}
+
+.post-review-btn button:hover {
+    color: hotpink;
+    background-color: pink;
 }
