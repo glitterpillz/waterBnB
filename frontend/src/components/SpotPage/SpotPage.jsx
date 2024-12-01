@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 import SpotReviewButton from '../SpotReviewModal/SpotReviewButton';
 import { useModal } from '../../context/Modal';
 import RemoveReviewModal from '../RemoveReviewModal/RemoveReviewModal';
+import UpdateReviewModal from '../UpdateReviewModal/UpdateReviewModal';
 
 const GoldStar = () => {
   return (
@@ -63,6 +64,21 @@ function SpotPage() {
         reviewId={reviewId}
         onDelete={(id) => {
           setReviews((prevReviews) => prevReviews.filter((review) => review.id !== id));
+        }}
+      />
+    );
+  };
+
+  const handleEditClick = (review) => {
+    console.log('Review to edit:', review)
+    setModalContent(
+      <UpdateReviewModal
+        review={review} 
+        spot={spot}
+        onEdit={(updatedReview) => {
+          setReviews((prevReviews) =>
+            prevReviews.map((r) => (r.id === updatedReview.id ? updatedReview : r))
+          );
         }}
       />
     );
@@ -153,6 +169,7 @@ function SpotPage() {
                 </div>
                 {user && user.id === review.User.id && (
                   <div className='review-actions'>
+                    <button onClick={() => handleEditClick(review)}>Edit</button>
                     <button onClick={() => handleDelete(review.id)}>Delete</button>
                   </div>
                 )}              

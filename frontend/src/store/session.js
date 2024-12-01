@@ -9,6 +9,7 @@ const DELETE_USER_SPOT = 'session/deleteSpot'
 const UPDATE_USER_SPOT = 'session/updateSpot'
 const ADD_REVIEW = 'session/addReview';
 const DELETE_REVIEW = 'session/deleteReview';
+const UPDATE_REVIEW = 'session/updateReview';
 
 const setUser = (user) => {
     return {
@@ -61,6 +62,13 @@ const addReview = (review) => {
 const deleteReview = (review) => {
     return {
         type: DELETE_REVIEW,
+        payload: review
+    }
+}
+
+const updateReview = (review) => {
+    return {
+        type: UPDATE_REVIEW,
         payload: review
     }
 }
@@ -201,6 +209,37 @@ export const removeReview = (reviewId, spotId) => async (dispatch) => {
     return response;
 }
 
+// export const editReview = (reviewId, updatedReviewData) => async (dispatch) => {
+//     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+//         method: 'PUT',
+//         body: JSON.stringify(updatedReviewData)
+//     });
+
+//     if (response.ok) {
+//         const data = response.json();
+//         dispatch(updateReview(data.review));
+//     }
+
+//     return response;
+// }
+
+export const editReview = (reviewId, updatedReviewData) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedReviewData),
+    });
+  
+    if (response.ok) {
+      const updatedReview = await response.json();
+      dispatch(updateReview(updatedReview)); // Example action creator
+      return updatedReview;
+    } else {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+  };
+
 const initialState = { 
     user: null, 
     userSpots: []
@@ -256,6 +295,22 @@ const sessionReducer = (state = initialState, action) => {
                         Reviews: spot.Reviews.filter((review) => review.id !== action.payload.reviewId),
                     }
                     : spot
+                ),
+            };
+        case UPDATE_REVIEW:
+            return {
+                ...state,
+                userSpots: state.userSpots.map((spot) =>
+                    spot.id === action.payload.spotId
+                        ? {
+                            ...spot,
+                            Reviews: spot.Reviews.map((review) =>
+                                review.id === action.payload.id
+                                    ? { ...review, ...action.payload }  // Merge the updated review with the existing one
+                                    : review
+                            ),
+                        }
+                        : spot
                 ),
             };
         default:
