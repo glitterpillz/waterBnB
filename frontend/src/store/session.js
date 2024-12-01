@@ -187,22 +187,18 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
 };
 
 export const removeReview = (reviewId, spotId) => async (dispatch) => {
-    try {
-        const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-            method: 'DELETE',
-        });
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE',
+    });
 
-        if (response.ok) {
-            dispatch(deleteReview({ reviewId, spotId }))
-        } else {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Failed to delete review');
-        }
-
-    } catch (error) {
-        console.error('Error deleting review:', error);
-        throw error;
+    if (response.ok) {
+        dispatch(deleteReview({ reviewId, spotId }))
+    } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to delete review');
     }
+
+    return response;
 }
 
 const initialState = { 
@@ -253,13 +249,11 @@ const sessionReducer = (state = initialState, action) => {
         case DELETE_REVIEW:
             return {
                 ...state,
-                userSpots: state.userSpots.map((spot) => 
+                userSpots: state.userSpots.map((spot) =>
                 spot.id === action.payload.spotId
                     ? {
                         ...spot,
-                        Reviews: spot.Reviews.filter(
-                            (review) => review.id !== action.payload.reviewId
-                        ),
+                        Reviews: spot.Reviews.filter((review) => review.id !== action.payload.reviewId),
                     }
                     : spot
                 ),

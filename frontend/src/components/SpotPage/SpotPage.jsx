@@ -40,8 +40,7 @@ function SpotPage() {
         }
         const data = await response.json();
         setSpot(data);
-        setReviews(data.Reviews || []);
-        console.log(data.Reviews); 
+        setReviews(data.Reviews || []); 
       } catch (err) {
         setError('Failed to load spot: ' + err.message);
       } finally {
@@ -58,21 +57,16 @@ function SpotPage() {
     return (totalStars / reviews.length).toFixed(1);
   }; 
 
-  // const handleDelete = async (reviewId) => {
-  //   try {
-  //     await dispatch(removeReview(reviewId));
-
-  //     setReviews(reviews.filter(review => review.id !== reviewId));
-  //   } catch (err) {
-  //     console.error('Error deleting review:', err);
-  //   }
-  // }
-
   const handleDelete = (reviewId) => {
     setModalContent(
-      <RemoveReviewModal reviewId={reviewId} />  // Trigger the RemoveReviewModal
+      <RemoveReviewModal
+        reviewId={reviewId}
+        onDelete={(id) => {
+          setReviews((prevReviews) => prevReviews.filter((review) => review.id !== id));
+        }}
+      />
     );
-  }
+  };
 
   if (isLoading) {
     return <div>Loading spot...</div>;
@@ -159,10 +153,9 @@ function SpotPage() {
                 </div>
                 {user && user.id === review.User.id && (
                   <div className='review-actions'>
-                    {/* <button onClick={() => handleEdit(review)}>Edit</button> */}
                     <button onClick={() => handleDelete(review.id)}>Delete</button>
                   </div>
-                )}
+                )}              
               </div>
             ))
           ) : (
