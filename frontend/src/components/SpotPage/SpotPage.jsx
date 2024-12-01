@@ -1,9 +1,12 @@
 import './SpotPage.css'
 
+import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 import SpotReviewButton from '../SpotReviewModal/SpotReviewButton';
+import { useModal } from '../../context/Modal';
+import RemoveReviewModal from '../RemoveReviewModal/RemoveReviewModal';
 
 const GoldStar = () => {
   return (
@@ -20,10 +23,13 @@ const formatDate = (dateString) => {
 
 function SpotPage() {
   const { spotId } = useParams();
+  const { setModalContent } = useModal();
   const [spot, setSpot] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
+
+  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
     const fetchSpot = async () => {
@@ -51,6 +57,22 @@ function SpotPage() {
     const totalStars = reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
     return (totalStars / reviews.length).toFixed(1);
   }; 
+
+  // const handleDelete = async (reviewId) => {
+  //   try {
+  //     await dispatch(removeReview(reviewId));
+
+  //     setReviews(reviews.filter(review => review.id !== reviewId));
+  //   } catch (err) {
+  //     console.error('Error deleting review:', err);
+  //   }
+  // }
+
+  const handleDelete = (reviewId) => {
+    setModalContent(
+      <RemoveReviewModal reviewId={reviewId} />  // Trigger the RemoveReviewModal
+    );
+  }
 
   if (isLoading) {
     return <div>Loading spot...</div>;
@@ -135,6 +157,12 @@ function SpotPage() {
                 <div className='review-text'>
                   <p>{review.review}</p>
                 </div>
+                {user && user.id === review.User.id && (
+                  <div className='review-actions'>
+                    {/* <button onClick={() => handleEdit(review)}>Edit</button> */}
+                    <button onClick={() => handleDelete(review.id)}>Delete</button>
+                  </div>
+                )}
               </div>
             ))
           ) : (

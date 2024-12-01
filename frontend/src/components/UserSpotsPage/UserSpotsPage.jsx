@@ -4,7 +4,7 @@ import * as sessionActions from '../../store/session';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
-import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal';
+import ConfirmDeleteSpotModal from '../ConfirmDeleteSpotModal/ConfirmDeleteModal';
 import { useModal } from '../../context/Modal';
 
 function UserSpotsPage() {
@@ -22,7 +22,7 @@ function UserSpotsPage() {
     }, [dispatch]);
 
     const handleDelete = (spotId) => {
-        setModalContent(<ConfirmDeleteModal spotId={spotId} />);
+        setModalContent(<ConfirmDeleteSpotModal spotId={spotId} />);
     }
 
 

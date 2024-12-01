@@ -8,6 +8,7 @@ const CREATE_USER_SPOT = 'session/createUserSpot'
 const DELETE_USER_SPOT = 'session/deleteSpot'
 const UPDATE_USER_SPOT = 'session/updateSpot'
 const ADD_REVIEW = 'session/addReview';
+const DELETE_REVIEW = 'session/deleteReview';
 
 const setUser = (user) => {
     return {
@@ -56,6 +57,13 @@ const addReview = (review) => {
         payload: review
     };
 };
+
+const deleteReview = (review) => {
+    return {
+        type: DELETE_REVIEW,
+        payload: review
+    }
+}
 
 
 export const restoreUser = () => async (dispatch) => {
@@ -178,6 +186,25 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
     }
 };
 
+export const removeReview = (reviewId, spotId) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            dispatch(deleteReview({ reviewId, spotId }))
+        } else {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to delete review');
+        }
+
+    } catch (error) {
+        console.error('Error deleting review:', error);
+        throw error;
+    }
+}
+
 const initialState = { 
     user: null, 
     userSpots: []
@@ -210,19 +237,33 @@ const sessionReducer = (state = initialState, action) => {
                 userSpots: state.userSpots.map((spot) =>
                   action.payload && spot.id === action.payload.id ? action.payload : spot
                 ),
-              };
+            };
         case ADD_REVIEW:
-        return {
-            ...state,
-            userSpots: state.userSpots.map((spot) =>
-            spot.id === action.payload.spotId
-                ? {
-                    ...spot,
-                    Review: [...(spot.Reviews || []), action.payload],
-                }
-                : spot
-            ),
-        };        
+            return {
+                ...state,
+                userSpots: state.userSpots.map((spot) =>
+                spot.id === action.payload.spotId
+                    ? {
+                        ...spot,
+                        Review: [...(spot.Reviews || []), action.payload],
+                    }
+                    : spot
+                ),
+            };        
+        case DELETE_REVIEW:
+            return {
+                ...state,
+                userSpots: state.userSpots.map((spot) => 
+                spot.id === action.payload.spotId
+                    ? {
+                        ...spot,
+                        Reviews: spot.Reviews.filter(
+                            (review) => review.id !== action.payload.reviewId
+                        ),
+                    }
+                    : spot
+                ),
+            };
         default:
             return state;
     }

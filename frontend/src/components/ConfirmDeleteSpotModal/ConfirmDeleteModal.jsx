@@ -5,7 +5,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 
-function ConfirmDeleteModal({ spotId }) {
+function ConfirmDeleteSpotModal({ spotId }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
@@ -50,4 +50,4 @@ function ConfirmDeleteModal({ spotId }) {
     )
 }
 
-export default ConfirmDeleteModal;
+export default ConfirmDeleteSpotModal;
