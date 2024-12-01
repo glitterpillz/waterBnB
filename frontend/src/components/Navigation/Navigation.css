@@ -28,10 +28,23 @@ a {
     font-family: "Parkinsans", sans-serif;
 }
 
+.water-drop {
+    color: white;
+    font-size: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.water-drop:hover {
+    color: #007573;
+}
+
 .home-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: color 0.3s ease;
 }
 
 .home-container:hover {
@@ -74,12 +87,21 @@ button:hover {
     text-decoration: none;
     color: #0CEFEB;
     font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.create-spot-btn:hover {
+    color: white;
 }
 
 .create-profile-group {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.profile-btn button:hover {
+    color: white;
 }
 
 @media (max-width: 768px) {

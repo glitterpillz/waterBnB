@@ -93,7 +93,7 @@ function LoginFormModal() {
                         className='demo-user'
                         onClick={handleDemoLogin}
                     >
-                        Demo User
+                        Log in as Demo User
                     </a>
                 </form>
             </div>

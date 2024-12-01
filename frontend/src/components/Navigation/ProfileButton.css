@@ -53,3 +53,15 @@
     padding: 0;
     font-weight: 400;
 }
+
+.user-list-button {
+    color: #0cefeb;
+    font-size: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.user-list-button:hover {
+    color: white;
+}

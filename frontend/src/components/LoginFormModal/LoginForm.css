@@ -33,7 +33,7 @@
 }
 
 .login-form p {
-    color: red;
+    color: hotpink;
 }
 
 .submit-btn button[disabled] {
@@ -47,7 +47,7 @@
 .demo-user {
     font-size: 1.5rem;
     text-align: center;
-    color: #007bff;
+    color: #007573;
     cursor: pointer;
 }
 

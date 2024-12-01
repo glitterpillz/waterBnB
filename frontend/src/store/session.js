@@ -7,6 +7,7 @@ const GET_USER_SPOTS = 'session/getUserSpots';
 const CREATE_USER_SPOT = 'session/createUserSpot'
 const DELETE_USER_SPOT = 'session/deleteSpot'
 const UPDATE_USER_SPOT = 'session/updateSpot'
+const GET_USER_REVIEWS = 'session/getUserReviews'
 const ADD_REVIEW = 'session/addReview';
 const DELETE_REVIEW = 'session/deleteReview';
 const UPDATE_REVIEW = 'session/updateReview';
@@ -52,6 +53,14 @@ const updateSpot = (spot) => {
     };
 };
 
+const setUserReviews = (reviews) => {
+    return {
+        type: GET_USER_REVIEWS,
+        payload: reviews
+    }
+}
+
+
 const addReview = (review) => {
     return {
         type: ADD_REVIEW,
@@ -73,11 +82,11 @@ const updateReview = (review) => {
     }
 }
 
-
 export const restoreUser = () => async (dispatch) => {
     const response = await csrfFetch('/api/session');
     const data = await response.json();
     dispatch(setUser(data.user));
+    dispatch(getUserReviews());
     return response;
 };
 
@@ -170,6 +179,17 @@ export const editUserSpot = (spotId, updatedSpotData) => async (dispatch) => {
     return response;
 }
 
+export const getUserReviews = () => async (dispatch) => {
+    const response = await csrfFetch('/api/session/reviews');
+    const data = await response.json();
+
+    if (data.reviews) {
+        dispatch(setUserReviews(data.review));
+    }
+
+    return response;
+}
+
 export const createReview = (spotId, reviewData) => async (dispatch) => {
     try {
         const response = await csrfFetch(`/api/reviews/${spotId}`, {
@@ -182,7 +202,7 @@ export const createReview = (spotId, reviewData) => async (dispatch) => {
 
         if (response.ok) {
             const data = await response.json();
-            dispatch(addReview(data.review)); 
+            dispatch(addReview(data.review));
             return data.review;
         } else {
             const errorData = await response.json();
@@ -207,34 +227,26 @@ export const removeReview = (reviewId, spotId) => async (dispatch) => {
     }
 
     return response;
-}
+};
 
 export const editReview = (reviewId, updatedReviewData) => async (dispatch) => {
-    try {
-        const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedReviewData),
-        });
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updatedReviewData),
+    });
 
-        if (response.ok) {
-            const updatedReview = await response.json();
-            console.log(updatedReview);
-            dispatch(updateReview(updatedReview)); // Dispatch to update Redux state
-            return updatedReview;
-        } else {
-            const error = await response.json();
-            throw new Error(error.message || 'Failed to update review');
-        }
-    } catch (error) {
-        console.error('Error updating review:', error);
-        throw error;
+    if (response.ok) {
+        const data = response.json();
+        dispatch(updateReview(data.Review));
     }
+
+    return response;
 };
 
 const initialState = { 
     user: null, 
-    userSpots: []
+    userSpots: [],
+    userReviews: []
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -265,47 +277,42 @@ const sessionReducer = (state = initialState, action) => {
                   action.payload && spot.id === action.payload.id ? action.payload : spot
                 ),
             };
-        case ADD_REVIEW:
+        case GET_USER_REVIEWS:
+            return { ...state, userReviews: action.payload }
+        case ADD_REVIEW:   
             return {
                 ...state,
                 userSpots: state.userSpots.map((spot) =>
-                spot.id === action.payload.spotId
-                    ? {
-                        ...spot,
-                        Review: [...(spot.Reviews || []), action.payload],
-                    }
-                    : spot
+                    spot.id === action.payload.spotId
+                        ? {
+                            ...spot,
+                            Reviews: [...(spot.Reviews || []), action.payload],
+                        }
+                        : spot
                 ),
-            };        
+                userReviews: [...state.userReviews, action.payload]
+            };
         case DELETE_REVIEW:
             return {
                 ...state,
                 userSpots: state.userSpots.map((spot) =>
-                spot.id === action.payload.spotId
-                    ? {
-                        ...spot,
-                        Reviews: spot.Reviews.filter((review) => review.id !== action.payload.reviewId),
-                    }
-                    : spot
+                    spot.id === action.payload.spotId
+                        ? {
+                            ...spot,
+                            Reviews: spot.Reviews.filter((review) => review.id !== action.payload.reviewId),
+                        }
+                        : spot
+                ),
+                userReviews: state.userReviews.filter((review) => review.id !== action.payload.reviewId)
+            };
+
+        case UPDATE_REVIEW:
+            return {
+                ...state,
+                userReviews: state.userReviews.map((review) =>
+                action.payload && review.id === action.payload.id ? action.payload : review
                 ),
             };
-            case UPDATE_REVIEW:
-                console.log("Updated review in state:", action.payload); // Check what's being dispatched
-                return {
-                    ...state,
-                    userSpots: state.userSpots.map((spot) =>
-                        spot.id === action.payload.spotId
-                            ? {
-                                ...spot,
-                                Reviews: spot.Reviews.map((review) =>
-                                    review.id === action.payload.id
-                                        ? { ...review, ...action.payload } // Update review details
-                                        : review
-                                ),
-                            }
-                            : spot
-                    ),
-                };
         default:
             return state;
     }

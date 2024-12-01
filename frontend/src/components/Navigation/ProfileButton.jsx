@@ -13,11 +13,12 @@ import SignupFormModal from '../SignupFormModal/SignupFormModal';
 
 const UserList = () => {
     return (
-        <div style={{ color: '#0cefeb', fontSize:'50px', marginTop: '10px', cursor: 'pointer'}}>
+        <div className="user-list-button">
             <PiUserListBold />
         </div>
     );
 };
+
 
 function ProfileButton({ user }) {
     const navigate = useNavigate();
@@ -66,7 +67,7 @@ function ProfileButton({ user }) {
     const hasSpots = userSpots && userSpots.length > 0;
 
     return (
-        <div>
+        <div className='profile-btn-container'>
             <button onClick={toggleMenu}>
                 <UserList />
             </button>
