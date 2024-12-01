@@ -209,36 +209,28 @@ export const removeReview = (reviewId, spotId) => async (dispatch) => {
     return response;
 }
 
-// export const editReview = (reviewId, updatedReviewData) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-//         method: 'PUT',
-//         body: JSON.stringify(updatedReviewData)
-//     });
-
-//     if (response.ok) {
-//         const data = response.json();
-//         dispatch(updateReview(data.review));
-//     }
-
-//     return response;
-// }
-
 export const editReview = (reviewId, updatedReviewData) => async (dispatch) => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedReviewData),
-    });
-  
-    if (response.ok) {
-      const updatedReview = await response.json();
-      dispatch(updateReview(updatedReview)); // Example action creator
-      return updatedReview;
-    } else {
-      const error = await response.json();
-      throw new Error(error.message);
+    try {
+        const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedReviewData),
+        });
+
+        if (response.ok) {
+            const updatedReview = await response.json();
+            console.log(updatedReview);
+            dispatch(updateReview(updatedReview)); // Dispatch to update Redux state
+            return updatedReview;
+        } else {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to update review');
+        }
+    } catch (error) {
+        console.error('Error updating review:', error);
+        throw error;
     }
-  };
+};
 
 const initialState = { 
     user: null, 
@@ -297,22 +289,23 @@ const sessionReducer = (state = initialState, action) => {
                     : spot
                 ),
             };
-        case UPDATE_REVIEW:
-            return {
-                ...state,
-                userSpots: state.userSpots.map((spot) =>
-                    spot.id === action.payload.spotId
-                        ? {
-                            ...spot,
-                            Reviews: spot.Reviews.map((review) =>
-                                review.id === action.payload.id
-                                    ? { ...review, ...action.payload }  // Merge the updated review with the existing one
-                                    : review
-                            ),
-                        }
-                        : spot
-                ),
-            };
+            case UPDATE_REVIEW:
+                console.log("Updated review in state:", action.payload); // Check what's being dispatched
+                return {
+                    ...state,
+                    userSpots: state.userSpots.map((spot) =>
+                        spot.id === action.payload.spotId
+                            ? {
+                                ...spot,
+                                Reviews: spot.Reviews.map((review) =>
+                                    review.id === action.payload.id
+                                        ? { ...review, ...action.payload } // Update review details
+                                        : review
+                                ),
+                            }
+                            : spot
+                    ),
+                };
         default:
             return state;
     }
