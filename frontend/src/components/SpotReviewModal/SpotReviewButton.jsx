@@ -5,7 +5,7 @@ const SpotReviewButton = ({ spot }) => {
     return (
         <OpenModalButton
             modalComponent={<ReviewFormModal spot={spot} />}
-            buttonText='Add Review'
+            buttonText='Post Your Review'
         />
     );
 };

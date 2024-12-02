@@ -1,3 +1,7 @@
+p {
+ font-size: 18px;
+}
+
 .spot-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -47,6 +51,7 @@
 
 .reserve-btn {
     width: 50%;
+    margin-bottom: 20px;
 }
 
 .reserve-btn button {
@@ -131,6 +136,34 @@
 }
 
 .post-review-btn button:hover {
+    color: hotpink;
+    background-color: pink;
+}
+
+.small-period {
+    font-size: 30px;
+}
+
+.large-period {
+    font-size: 40px;
+}
+
+.review-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.review-actions button {
+    color: white;
+    background-color: hotpink;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+    border: none;
+}
+
+.review-actions button:hover {
+    cursor: pointer;
     color: hotpink;
     background-color: pink;
 }

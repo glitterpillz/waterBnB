@@ -126,8 +126,12 @@ function SpotPage() {
             </div>
             <div className='rating-reviews'>
               <GoldStar /> {avgRating}
-              <span> · </span>
-              <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+              {reviews.length > 0 && (
+                <>
+                  <span className='small-period'> · </span>
+                  <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+                </>
+              )}
             </div>
           </div>
           <div className='reserve-btn'>
@@ -143,42 +147,48 @@ function SpotPage() {
       <br />
 
       <div className='reviews-container'>
-        <div className='reviews-header'>
-          <GoldStar />
-          <h3>{avgRating}</h3>
-          <span> · </span>
-          <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
-        </div>
+      <div className='reviews-header'>
+        <GoldStar />
+        <h3>{avgRating}</h3>
+        {reviews.length > 0 && (
+          <>
+            <span className='large-period'> · </span>
+            <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+          </>
+        )}
+      </div>
+      {user && user.id !== spot.Owner.id && (
         <div className='post-review-btn'>
           <SpotReviewButton spot={spot} />
         </div>
-        <br />
-        {reviews.length > 0 ? (
-          reviews.map((review) => (
-            <div key={review.id} className='review-card'>
-              <div className='reviewer'>
-                <div className='reviewer-stars'>
-                  <GoldStar /> {review.stars}
-                </div>
-                <p>{review.User?.firstName}</p>
+      )}
+      <br />
+      {reviews.length > 0 ? (
+        reviews.map((review) => (
+          <div key={review.id} className='review-card'>
+            <div className='reviewer'>
+              <div className='reviewer-stars'>
+                <GoldStar /> {review.stars}
               </div>
-              <div className='review-date'>
-                <p>{formatDate(review.createdAt)}</p>
-              </div>
-              <div className='review-text'>
-                <p>{review.review}</p>
-              </div>
-              {user && user.id === review.User.id && (
-                <div className='review-actions'>
-                  <button onClick={() => handleEditClick(review)}>Edit</button>
-                  <button onClick={() => handleDelete(review.id)}>Delete</button>
-                </div>
-              )}
+              <p>{review.User?.firstName}</p>
             </div>
-          ))
-        ) : (
-          <p>Be the first to post a review!</p>
-        )}
+            <div className='review-date'>
+              <p>{formatDate(review.createdAt)}</p>
+            </div>
+            <div className='review-text'>
+              <p>{review.review}</p>
+            </div>
+            {user && user.id === review.User.id && (
+              <div className='review-actions'>
+                <button onClick={() => handleEditClick(review)}>Edit</button>
+                <button onClick={() => handleDelete(review.id)}>Delete</button>
+              </div>
+            )}
+          </div>
+        ))
+      ) : (
+        user && user.id !== spot.Owner.id && <p>Be the first to post a review!</p>
+      )}
       </div>
     </div>
   );
