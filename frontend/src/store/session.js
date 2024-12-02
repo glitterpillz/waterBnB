@@ -134,7 +134,6 @@ export const logout = () => async (dispatch) => {
 export const getUserSpots = () => async (dispatch) => {
     const response = await csrfFetch('/api/session/spots');
     const data = await response.json();
-    console.log('Fetched spots:', data.Spots);
     if (data.Spots) {
         dispatch(setUserSpots(data.Spots));
     }
@@ -258,7 +257,6 @@ const sessionReducer = (state = initialState, action) => {
         case SIGNUP_USER:
             return { ...state, user: action.payload };
         case GET_USER_SPOTS:
-            console.log('Reducer received spots:', action.payload)
             return { ...state, userSpots: action.payload };
         case CREATE_USER_SPOT:
             return {
@@ -303,7 +301,7 @@ const sessionReducer = (state = initialState, action) => {
                         }
                         : spot
                 ),
-                userReviews: state.userReviews.filter((review) => review.id !== action.payload.reviewId)
+                userReviews: state.userReviews.filter((review) => review.id !== action.payload.reviewId),
             };
 
         case UPDATE_REVIEW:

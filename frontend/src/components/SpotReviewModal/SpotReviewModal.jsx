@@ -25,7 +25,6 @@ const ReviewFormModal = ({ spot }) => {
             const response = await dispatch(createReview(spotId, reviewData));
 
             if (response) {
-                console.log(response);
                 closeModal();
             }
         } catch (err) {

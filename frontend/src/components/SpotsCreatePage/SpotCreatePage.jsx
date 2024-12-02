@@ -71,7 +71,6 @@ function SpotCreatePage() {
       
         if (response.ok) {
           const data = await response.json();
-          console.log("Spot created with data:", data);
           navigate(`/spots/${data.id}`);
         } else {
           console.error("Failed to create spot:", response);

@@ -20,7 +20,6 @@ function EditSpotForm({ spot, setEditingSpot }) {
     previewImage: spot.previewImage,
   });
 
-  console.log(spot.images);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

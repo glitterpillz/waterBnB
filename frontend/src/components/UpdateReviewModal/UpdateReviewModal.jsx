@@ -21,12 +21,10 @@ const UpdateReviewModal = ({ review, onUpdate }) => {
         e.preventDefault();
 
         const updatedReviewData = { review: reviewText, stars };
-        console.log(updatedReviewData);
 
         try {
             const response = await dispatch(editReview(review.id, updatedReviewData));
             if (response) {
-                console.log('Updated review:', response);
                 if (onUpdate) onUpdate(response);
                 closeModal();
             }

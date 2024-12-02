@@ -6,14 +6,6 @@ import { MdOutlineWaterDrop } from "react-icons/md";
 
 import ProfileButton from './ProfileButton';
 
-// const WaterDrop = () => {
-//     return (
-//         <div style={{ color: 'white', fontSize:'50px', marginTop: '10px'}}>
-//             <MdOutlineWaterDrop />
-//         </div>
-//     );
-// };
-
 const WaterDrop = () => {
     return (
         <div className="water-drop">

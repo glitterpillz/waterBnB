@@ -13,7 +13,6 @@ function UserSpotsPage() {
     const { setModalContent } = useModal();
 
     const userSpots = useSelector((state) => {
-        console.log('Redux State:', state);
         return state.session.userSpots;
     })
 
