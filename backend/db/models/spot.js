@@ -29,10 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       address: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(500),
         allowNull: false,
         validate: {
-          len: [1, 255],
+          len: [1, 500],
           firstLetterCap(value) {
             const array = value.split(" ");
 
