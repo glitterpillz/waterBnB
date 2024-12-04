@@ -71,7 +71,7 @@ module.exports = {
             lat: 34.0529,
             lng: -118.2417,
             name: "Seaside Getaway",
-            description: "Set along Pelican Town’s coastline, this beachfront home offers stunning ocean views and a private dock. Enjoy beachside relaxation, water activities, and cozy indoor comforts. The airy interiors and outdoor spaces provide the perfect setting for unwinding by the sea. Great for families or couples looking for a coastal retreat with plenty of charm.",
+            description: "Set along Pelican Town's coastline, this beachfront home offers stunning ocean views and a private dock. Enjoy beachside relaxation, water activities, and cozy indoor comforts. The airy interiors and outdoor spaces provide the perfect setting for unwinding by the sea. Great for families or couples looking for a coastal retreat with plenty of charm.",
             price: 220,
             previewImage: "https://i.ibb.co/mF09LxD/beach-farm.jpg"
           },
