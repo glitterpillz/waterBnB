@@ -27,13 +27,18 @@
 }
 
 .delete-btn {
-    background-color: hotpink;
+    background-color: rgb(218, 28, 123);
     color: white;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: pink;
+    color: rgb(218, 28, 123);
 }
 
 .cancel-btn {
@@ -44,4 +49,9 @@
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+}
+
+.cancel-btn:hover {
+    background-color: #0cefeb;
+    color: darkslategray;
 }

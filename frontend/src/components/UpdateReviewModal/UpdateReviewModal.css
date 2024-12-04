@@ -1,0 +1,9 @@
+.review-modal-btns button {
+    background-color: #0cefeb;
+    color: #007573
+}
+
+.review-modal-btns:hover {
+    background-color: #007573;
+    color: white;
+}

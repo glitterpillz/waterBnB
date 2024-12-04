@@ -2,6 +2,11 @@ p {
  font-size: 18px;
 }
 
+img {
+    color: #333;
+    font-size: 1.8rem;
+}
+
 .spot-container {
     max-width: 1000px;
     margin: 0 auto;
