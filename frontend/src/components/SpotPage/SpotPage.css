@@ -20,9 +20,9 @@ img {
     text-align: left;
 }
 
-.location-header {
-    margin-bottom: 0.5rem;
-}
+/* .location-header {
+    margin-bottom: 1rem;
+} */
 
 .image-container {
     display: grid;

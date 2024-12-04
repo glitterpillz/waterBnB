@@ -101,6 +101,7 @@ function SpotPage() {
     <div className='spot-container'>
       <h1 className='spot-header'>{spot.name}</h1>
       <h3 className='location-header'>{spot.city}, {spot.state}, {spot.country}</h3>
+      <br />
       <div className='image-container'>
         <div className='preview-image-container'>
           <img src={spot.previewImage} alt={spot.name} />
