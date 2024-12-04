@@ -19,7 +19,7 @@ module.exports = {
             lat: 34.0522,
             lng: -118.2437,
             name: "Cozy Farmhouse",
-            description: "Escape to this charming farmhouse in Pelican Town, surrounded by lush farmland and mountain views. Enjoy cozy interiors, a spacious kitchen, and a peaceful porch for relaxing. Explore nearby nature trails, visit local markets, or unwind in the serene countryside atmosphere. This rustic retreat is ideal for those seeking tranquility and scenic beauty in the heart of the Valley.",
+            description: "Escape to this charming farmhouse in Pelican Town, surrounded by lush farmland and mountain views.",
             price: 120,
             previewImage: "https://i.ibb.co/xHT5MJT/standard-house.png"
           },
@@ -32,7 +32,7 @@ module.exports = {
             lat: 34.0922,
             lng: -118.2937,
             name: "Forest Retreat",
-            description: "Nestled in Cindersap Forest, this enchanting cabin offers a tranquil escape surrounded by towering trees. Relax by the fireplace or enjoy the cozy interiors after a day of exploring forest trails. Perfect for nature lovers, it’s a great spot for birdwatching, stargazing, or unwinding with a good book. The serene setting and rustic charm make it a perfect peaceful retreat.",
+            description: "Nestled in Cindersap Forest, this enchanting cabin offers a tranquil escape surrounded by towering trees.",
             price: 95,
             previewImage: "https://i.ibb.co/DkPrtJ5/forest-house.png"
           },
@@ -45,7 +45,7 @@ module.exports = {
             lat: 34.1522,
             lng: -118.2837,
             name: "Riverbank Cottage",
-            description: "This riverside cottage in Pelican Town provides a serene escape with picturesque water views. Enjoy fishing, peaceful riverside walks, or relaxing in the cozy interiors. Featuring a welcoming living space and outdoor seating, it’s perfect for quiet reflection or quality time with loved ones. Ideal for a restful vacation surrounded by nature’s beauty.",
+            description: "This riverside cottage in Pelican Town provides a serene escape with picturesque water views.",
             price: 140,
             previewImage: "https://i.ibb.co/XSy7w92/river-house.png"
           },
@@ -58,7 +58,7 @@ module.exports = {
             lat: 34.1923,
             lng: -118.3838,
             name: "Stardrop Hill Retreat",
-            description: "Located on Stardrop Hill, this retreat offers breathtaking views of starry skies and lush landscapes. The home features modern comforts, a spacious deck, and access to nearby trails. Relax in the peaceful mountain setting, enjoy stargazing, or explore the natural beauty of the Valley. A perfect getaway for those seeking serenity and adventure.",
+            description: "Located on Stardrop Hill, this retreat offers breathtaking views of starry skies and lush landscapes.",
             price: 190,
             previewImage: "https://i.ibb.co/HrTkDct/hilltop-farm.jpg"
           },
@@ -71,23 +71,22 @@ module.exports = {
             lat: 34.0529,
             lng: -118.2417,
             name: "Seaside Getaway",
-            description: "Set along Pelican Town's coastline, this beachfront home offers stunning ocean views and a private dock. Enjoy beachside relaxation, water activities, and cozy indoor comforts. The airy interiors and outdoor spaces provide the perfect setting for unwinding by the sea. Great for families or couples looking for a coastal retreat with plenty of charm.",
+            description: "Set along Pelican Town's coastline, this beachfront home offers stunning ocean views and a private dock.",
             price: 220,
             previewImage: "https://i.ibb.co/mF09LxD/beach-farm.jpg"
           },
-
-
           // {
-          //   ownerId: 3,
-          //   address: "789 Saloon Street",
+          //   ownerId: 2,
+          //   address: "789 Wilderness Way",
           //   city: "Pelican Town",
           //   state: "Valley",
           //   country: "Stardew",
           //   lat: 34.0524,
           //   lng: -118.2440,
-          //   name: "Saloon Studio",
-          //   description: "A cozy room above the Saloon with easy access to town nightlife.",
+          //   name: "Wild Retreat",
+          //   description: "A cozy room in the wilderness with access to the wildlife at all hours of the day and night.",
           //   price: 75,
+          //   previewImage: "https://ibb.co/Ssc6wt5"
           // },
           // {
           //   ownerId: 3,
