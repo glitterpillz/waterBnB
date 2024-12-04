@@ -86,7 +86,7 @@ module.exports = {
             name: "Wild Retreat",
             description: "Located in the heart of the wilderness, this cozy cabin offers a unique experience for nature enthusiasts.",
             price: 75,
-            previewImage: "https://ibb.co/Ssc6wt5"
+            previewImage: "https://i.ibb.co/Wg7Lhqs/wilderness-farm.jpg"
           },
           // {
           //   ownerId: 3,
