@@ -19,7 +19,7 @@ module.exports = {
             lat: 34.0522,
             lng: -118.2437,
             name: "Cozy Farmhouse",
-            description: "Nestled in the heart of Pelican Town, this charming farmhouse offers a cozy retreat surrounded by lush farmland and breathtaking mountain views. With its warm, welcoming atmosphere, it's the perfect spot to unwind, enjoy nature, and experience the simple joys of country living. Whether you're tending to your crops or taking in the scenic vistas, you'll find peace and tranquility in this picturesque setting.",
+            description: "Nestled in the heart of Pelican Town, this charming farmhouse offers a cozy retreat surrounded by lush farmland and breathtaking mountain views.",
             price: 120,
             previewImage: "https://i.ibb.co/xHT5MJT/standard-house.png"
           },
@@ -32,7 +32,7 @@ module.exports = {
             lat: 34.0922,
             lng: -118.2937,
             name: "Forest Retreat",
-            description: "Tucked away in the serene Cindersap Forest, this enchanting cabin offers a peaceful escape amidst towering trees and natural beauty. Whether you're strolling through the forest or simply relaxing on the porch, the retreat provides a perfect sanctuary for nature lovers. The cabin's rustic charm, paired with its tranquil setting, creates an ideal getaway for those looking to disconnect and immerse themselves in the calm of the forest.",
+            description: "Tucked away in the serene Cindersap Forest, this enchanting cabin offers a peaceful escape amidst towering trees and natural beauty.",
             price: 95,
             previewImage: "https://i.ibb.co/DkPrtJ5/forest-house.png"
           },
@@ -45,7 +45,7 @@ module.exports = {
             lat: 34.1522,
             lng: -118.2837,
             name: "Riverbank Cottage",
-            description: "Located along the scenic banks of the river in Pelican Town, this cozy riverside cottage is an idyllic retreat. Enjoy the soothing sounds of flowing water as you unwind on the porch, or take a walk along the water's edge. The cottage's serene ambiance and beautiful river views create a perfect escape for those seeking relaxation and natural beauty in the heart of the town.",
+            description: "Located along the scenic banks of the river in Pelican Town, this cozy riverside cottage is an idyllic retreat.",
             price: 140,
             previewImage: "https://i.ibb.co/XSy7w92/river-house.png"
           },
@@ -58,7 +58,7 @@ module.exports = {
             lat: 34.1923,
             lng: -118.3838,
             name: "Stardrop Hill Retreat",
-            description: "Perched on the edge of Stardew Mountain, this hilltop retreat offers sweeping views of the valley and starry skies above. Surrounded by lush landscapes, the property is a haven for those seeking peace and solitude. Whether you're stargazing from the balcony or exploring the nearby hiking trails, the retreat provides an exceptional setting for relaxation and adventure, all while enjoying the tranquil beauty of Stardew Valley.",
+            description: "Perched on the edge of Stardew Mountain, this hilltop retreat offers sweeping views of the valley and starry skies above.",
             price: 190,
             previewImage: "https://i.ibb.co/HrTkDct/hilltop-farm.jpg"
           },
@@ -71,7 +71,7 @@ module.exports = {
             lat: 34.0529,
             lng: -118.2417,
             name: "Seaside Getaway",
-            description: "This stunning beachfront home is located along the coast of Pelican Town, offering sweeping views of the ocean and a private dock. The soothing sounds of the waves and the fresh sea breeze make this home a perfect place to unwind and enjoy nature. With easy access to the beach, you can spend your days soaking up the sun, fishing, or simply enjoying the beauty of the sea and the surrounding coastal landscape.",
+            description: "This stunning beachfront home is located along the coast of Pelican Town, offering sweeping views of the ocean and a private dock.",
             price: 220,
             previewImage: "https://i.ibb.co/mF09LxD/beach-farm.jpg"
           },
@@ -84,7 +84,7 @@ module.exports = {
             lat: 34.0524,
             lng: -118.2440,
             name: "Wild Retreat",
-            description: "Located in the heart of the wilderness, this cozy cabin offers a unique experience for nature enthusiasts. Wake up to the sounds of wildlife and enjoy access to the surrounding forest at any time of the day or night. Whether you're an avid bird watcher, photographer, or simply enjoy the peace of the wild, this retreat offers an immersive experience in the heart of nature, allowing you to connect with the beauty of the great outdoors.",
+            description: "Located in the heart of the wilderness, this cozy cabin offers a unique experience for nature enthusiasts.",
             price: 75,
             previewImage: "https://ibb.co/Ssc6wt5"
           },
