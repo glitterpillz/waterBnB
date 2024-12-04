@@ -135,31 +135,31 @@ module.exports = {
           url: "https://i.ibb.co/8Dh7jnG/beach-zoom2.jpg",
           preview: true,
         },
-        // {
-        //   spotId: 6,
-        //   url: "https://ibb.co/Ssc6wt5",
-        //   preview: true,
-        // },
-        // {
-        //   spotId: 6,
-        //   url: "https://ibb.co/9VQHT1d",
-        //   preview: true,
-        // },
-        // {
-        //   spotId: 6,
-        //   url: "https://ibb.co/jJf1NmM",
-        //   preview: true,
-        // },
-        // {
-        //   spotId: 6,
-        //   url: "https://ibb.co/XD1Y5Hm",
-        //   preview: true,
-        // },
-        // {
-        //   spotId: 5,
-        //   url: "https://i.ibb.co/8Dh7jnG/beach-zoom2.jpg",
-        //   preview: true,
-        // },
+        {
+          spotId: 6,
+          url: "https://i.ibb.co/Wg7Lhqs/wilderness-farm.jpg",
+          preview: true,
+        },
+        {
+          spotId: 6,
+          url: "https://i.ibb.co/7zV7NGd/wilderness-layout.jpg",
+          preview: true,
+        },
+        {
+          spotId: 6,
+          url: "https://i.ibb.co/vVNtbvY/wilderness-zoom.jpg",
+          preview: true,
+        },
+        {
+          spotId: 6,
+          url: "https://i.ibb.co/QFVxZwv/wilderness-zoom1.jpg",
+          preview: true,
+        },
+        {
+          spotId: 6,
+          url: "https://i.ibb.co/Gst0QFf/wilderness-zoom2.jpg",
+          preview: true,
+        },
       ],
       
       { validate: true }
