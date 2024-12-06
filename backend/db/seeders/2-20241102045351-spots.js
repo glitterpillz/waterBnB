@@ -78,7 +78,7 @@ module.exports = {
           {
             ownerId: 2,
             address: "789 Wilderness Way",
-            city: "Pelican Town",
+            city: "Star Hills",
             state: "Valley",
             country: "Stardew",
             lat: 34.0524,

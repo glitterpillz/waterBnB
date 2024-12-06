@@ -52,7 +52,7 @@ const ReviewFormModal = ({ spot }) => {
                     {errors.review && <span className='error'>{errors.review}</span>}
                 </label>
 
-                <label>
+                <label className='stars'>
                     Stars:
                     <div className="star-rating">
                         {[1, 2, 3, 4, 5].map((starValue) => (

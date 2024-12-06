@@ -20,15 +20,5 @@
 
 #modal-content {
     position: absolute;
-    background-color: white;
+    background-color: #c9e9ed;
 }
-
-/* #modal button {
-    color: #007573;
-    font-weight: bold;
-}
-
-#modal button:hover {
-    color: white;
-    background-color: #007573;
-} */

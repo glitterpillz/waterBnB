@@ -14,6 +14,10 @@
     padding: 40px;
 }
 
+.review-modal-container h2 {
+    font-size: 32px;
+}
+
 .review-modal-btns button {
     background-color: #0cefeb;
     color: #007573
@@ -38,6 +42,18 @@
     align-items: center;
 }
 
+.add-review-form textarea {
+    width: 300px;
+    height: 10vw;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.stars {
+    font-size: 1.5rem;
+    color: #333
+}
+
 .star-rating {
     display: flex;
     gap: 5px;
@@ -45,16 +61,16 @@
 }
 
 .star-icon {
-    font-size: 24px;
-    color: gray;
+    font-size: 32px;
+    color: pink;
 }
 
 .star-icon.filled {
-    color: gold;
+    color: hotpink;
 }
 
 .star-icon:hover {
-    color: gold;
+    color: hotpink;
 }
 
 .review-modal-btns {
