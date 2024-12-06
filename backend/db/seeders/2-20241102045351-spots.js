@@ -26,7 +26,7 @@ module.exports = {
           {
             ownerId: 2,
             address: "456 Junimo Grove",
-            city: "Cindersap Forest",
+            city: "Cindersap",
             state: "Valley",
             country: "Stardew",
             lat: 34.0922,
@@ -52,7 +52,7 @@ module.exports = {
           {
             ownerId: 4,
             address: "808 Stardrop Hill",
-            city: "Stardew Mountain",
+            city: "Star Hills",
             state: "Valley",
             country: "Stardew",
             lat: 34.1923,
