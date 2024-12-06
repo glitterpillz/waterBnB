@@ -146,6 +146,7 @@ export const createUserSpot = (spotData) => async (dispatch) => {
         body: JSON.stringify(spotData)
     });
     const data = await response.json();
+    console.log(data)
     if (data.Spot) {
         dispatch(addUserSpot(data.Spot))
     }
@@ -303,7 +304,6 @@ const sessionReducer = (state = initialState, action) => {
                 ),
                 userReviews: state.userReviews.filter((review) => review.id !== action.payload.reviewId),
             };
-
         case UPDATE_REVIEW:
             return {
                 ...state,

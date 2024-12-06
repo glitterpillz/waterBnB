@@ -33,43 +33,60 @@ function SignupFormModal() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});
-
-        if (!isValid()) {
-            setErrors({
-                username: username.length < 4 ? 'Username must be at least 4 characters long' : '',
-                password: password.length < 6 ? 'Password must be at least 6 characters long' : '',
-            });
+    
+        const validationErrors = {};
+    
+        if (!validateEmail(email)) {
+            validationErrors.email = 'Email is invalid';
+        }
+    
+        if (username.length < 4) {
+            validationErrors.username = 'Username must be at least 4 characters long';
+        }
+    
+        if (password.length < 6) {
+            validationErrors.password = 'Password must be at least 6 characters long';
+        }
+    
+        if (password !== confirmPassword) {
+            validationErrors.confirmPassword = 'Passwords must match';
+        }
+    
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
             return;
         }
-
-        if (isValid() && password === confirmPassword) {
-            setErrors({});
-            return dispatch(
-                sessionActions.signup({
-                    email,
-                    username,
-                    firstName,
-                    lastName,
-                    password
-                })
-            ).then(closeModal)
-            .catch(async (res) => {
-                const data = await res.json();
-                
-                if (data?.errors) {
-                    setErrors((prevErrors) => ({
-                        ...prevErrors,
-                        ...data.errors,
-                    }));
-                }
-            });
-        }
-        return setErrors({
-            email: 'The provided email is invalid',
-            username: 'Username must be unique',
-            confirmPassword: 'Passwords must match',
+    
+        return dispatch(
+            sessionActions.signup({
+                email,
+                username,
+                firstName,
+                lastName,
+                password
+            })
+        )
+        .then(closeModal)
+        .catch(async (res) => {
+            const data = await res.json();
+    
+            if (data?.errors) {
+                const errorData = data.errors;
+    
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    ...errorData,
+                }));
+            }
         });
     };
+    
+
+    const validateEmail = (email) => {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(email);
+    };
+    
 
     return (
         <div className='signup-form-container'>

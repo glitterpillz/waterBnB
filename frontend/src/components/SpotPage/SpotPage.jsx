@@ -53,6 +53,8 @@ function SpotPage() {
     fetchSpot();
   }, [spotId]);
 
+  const hasUserReviewed = reviews.some(review => review.User.id === user?.id);
+
   const calculateAvgRating = () => {
     if (!reviews || reviews.length === 0) return 'New';
     const totalStars = reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
@@ -159,11 +161,11 @@ function SpotPage() {
           </>
         )}
       </div>
-      {user && user.id !== spot.Owner.id && (
-        <div className='post-review-btn'>
-          <SpotReviewButton spot={spot} />
-        </div>
-      )}
+      {user && user.id !== spot.Owner.id && !hasUserReviewed && (
+          <div className='post-review-btn'>
+            <SpotReviewButton spot={spot} />
+          </div>
+        )}
       <br />
       {reviews.length > 0 ? (
         reviews.map((review) => (

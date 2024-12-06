@@ -14,7 +14,7 @@ const ReviewFormModal = ({ spot }) => {
     const [stars, setStars] = useState(0); // Initialize stars with 0
     const [errors, setErrors] = useState({});
 
-    const isValid = () => review.length >= 1 && stars >= 1;
+    const isValid = () => review.length >= 10 && stars >= 1;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +39,7 @@ const ReviewFormModal = ({ spot }) => {
     return (
         <div className='review-modal-container'>
             <h2>How was your stay?</h2>
+            {errors.form && <div className='error-message'>{errors.form}</div>}
             <br />
             <form className='add-review-form' onSubmit={handleSubmit}>
                 <label>

@@ -36,7 +36,13 @@ function UserSpotsPage() {
     return (
         <div className='user-spots-container'>
             <h1>Manage Your Spots</h1>
-            <button className='new-spot-btn' type='button'>Create a New Spot</button>
+            <button 
+                className='new-spot-btn' 
+                type='button'
+                onClick={() => navigate('/spots/new')}
+            >
+                Create a New Spot
+            </button>
             <div className='spots-container'>
                 {userSpots.length > 0 ? (
                     userSpots.map((spot) => {
