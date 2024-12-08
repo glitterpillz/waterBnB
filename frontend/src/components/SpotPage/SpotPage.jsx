@@ -151,16 +151,16 @@ function SpotPage() {
       <br />
 
       <div className='reviews-container'>
-      <div className='reviews-header'>
-        <GoldStar />
-        <h3>{avgRating}</h3>
-        {reviews.length > 0 && (
-          <>
-            <span className='large-period'> · </span>
-            <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
-          </>
-        )}
-      </div>
+        <div className='reviews-header'>
+          <GoldStar />
+          <h3>{avgRating}</h3>
+          {reviews.length > 0 && (
+            <>
+              <span className='large-period'> · </span>
+              <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+            </>
+          )}
+        </div>
       {user && user.id !== spot.Owner.id && !hasUserReviewed && (
           <div className='post-review-btn'>
             <SpotReviewButton spot={spot} />
