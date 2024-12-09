@@ -21,6 +21,7 @@ function EditSpotPage() {
     return <p>Loading...</p>; 
   }
 
+  
   return (
     <div>
       <EditSpotForm spot={spot} setEditingSpot={setSpot} />
