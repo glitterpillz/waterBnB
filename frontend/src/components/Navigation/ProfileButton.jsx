@@ -79,23 +79,15 @@ function ProfileButton({ user }) {
                         <hr />
 
                         <li>
-                            {hasSpots ? (
-                                <Link
-                                    className="manage-spots"
-                                    to={"/user/spots"}
-                                    onClick={closeMenu}
-                                >
-                                    Manage Spots
-                                </Link>
-                            ) : (
-                                <Link
-                                    className="create-spot"
-                                    to={"/spots/new"}
-                                    onClick={closeMenu}
-                                >
-                                    Create a New Spot
-                                </Link>
-                            )}
+                        {hasSpots ? (
+                            <Link className="manage-spots" to={"/user/spots"} onClick={closeMenu}>
+                                Manage Spots
+                            </Link>
+                        ) : (
+                            <Link className="create-spot" to={"/spots/new"} onClick={closeMenu}>
+                                Create a New Spot
+                            </Link>
+                        )}
                         </li>
 
                         <li>
