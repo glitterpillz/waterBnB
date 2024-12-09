@@ -11,7 +11,7 @@ const ReviewFormModal = ({ spot }) => {
     const spotId = spot.id;
     
     const [review, setReview] = useState('');
-    const [stars, setStars] = useState(0); // Initialize stars with 0
+    const [stars, setStars] = useState(0); 
     const [errors, setErrors] = useState({});
 
     const isValid = () => review.length >= 10 && stars >= 1;

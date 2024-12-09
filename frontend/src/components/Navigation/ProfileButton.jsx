@@ -19,7 +19,6 @@ const UserList = () => {
     );
 };
 
-
 function ProfileButton({ user }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,9 +30,9 @@ function ProfileButton({ user }) {
 
     useEffect(() => {
         if (user) {
-            dispatch(sessionActions.getUserSpots());
+            dispatch(sessionActions.getUserSpots()); 
         }
-    }, [dispatch, user])
+    }, [dispatch, user]);
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -45,12 +44,12 @@ function ProfileButton({ user }) {
 
         const closeMenu = (e) => {
             if (ulRef.current && !ulRef.current.contains(e.target)) {
-              setShowMenu(false);
+                setShowMenu(false);
             }
         };
-        document.addEventListener('click', closeMenu);
+        document.addEventListener("click", closeMenu);
 
-        return () => document.removeEventListener('click', closeMenu);
+        return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
     const closeMenu = () => setShowMenu(false);
@@ -59,15 +58,15 @@ function ProfileButton({ user }) {
         e.preventDefault();
         dispatch(sessionActions.logout());
         closeMenu();
-        navigate('/');
+        navigate("/");
     };
 
-    const ulClassName = 'profile-dropdown' + (showMenu ? "" : " hidden");
+    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
     const hasSpots = userSpots && userSpots.length > 0;
 
     return (
-        <div className='profile-btn-container'>
+        <div className="profile-btn-container">
             <button onClick={toggleMenu}>
                 <UserList />
             </button>
@@ -82,16 +81,16 @@ function ProfileButton({ user }) {
                         <li>
                             {hasSpots ? (
                                 <Link
-                                    className='manage-spots'
-                                    to={'/user/spots'}
+                                    className="manage-spots"
+                                    to={"/user/spots"}
                                     onClick={closeMenu}
                                 >
                                     Manage Spots
                                 </Link>
                             ) : (
                                 <Link
-                                    className='create-spot'
-                                    to={'/spots/new'}
+                                    className="create-spot"
+                                    to={"/spots/new"}
                                     onClick={closeMenu}
                                 >
                                     Create a New Spot
@@ -102,20 +101,19 @@ function ProfileButton({ user }) {
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>
-
                     </>
                 ) : (
                     <>
                         <li>
                             <OpenModalButton
-                                buttonText='Log In'
+                                buttonText="Log In"
                                 onButtonClick={closeMenu}
                                 modalComponent={<LoginFormModal />}
                             />
                         </li>
                         <li>
                             <OpenModalButton
-                                buttonText='Sign Up'
+                                buttonText="Sign Up"
                                 onButtonClick={closeMenu}
                                 modalComponent={<SignupFormModal />}
                             />

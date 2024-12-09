@@ -195,8 +195,8 @@ router.put(
       .withMessage("Name must be less than 50 characters"),
     check("description")
       .exists({ checkFalsey: true })
-      .isLength({ min: 1 })
-      .withMessage("Description is required"),
+      .isLength({ min: 1, max: 500 }) 
+      .withMessage("Description must be between 1 and 500 characters"),
     check("price")
       .exists({ checkFalsey: true })
       .isFloat({ gt: 0 })
@@ -255,6 +255,7 @@ router.put(
     res.status(200).json(spotToUpdate);
   }
 );
+
 
 router.delete("/:spotId", requireAuth, async (req, res) => {
   try {
@@ -415,15 +416,14 @@ router.post(
       .withMessage("Name must be less than 50 characters"),
     check("description")
       .exists({ checkFalsey: true })
-      .isLength({ min: 1 })
-      .withMessage("Description is required"),
+      .isLength({ min: 1, max: 500 })
+      .withMessage("Description must be between 1 and 500 characters"),
     check("price")
       .exists({ checkFalsey: true })
       .isFloat({ gt: 0 })
       .withMessage("Price per day must be a positive number"),
     handleValidationErrors,
   ],
-
   async (req, res) => {
     try {
       const {
@@ -454,7 +454,6 @@ router.post(
       });
 
       res.status(201).json(newSpot);   
-
     } catch (err) {
       console.error("Error creating spot:", err);
       res.status(500).json({
@@ -463,5 +462,6 @@ router.post(
     }
   }
 );
+
 
 module.exports = router;

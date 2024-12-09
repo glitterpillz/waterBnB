@@ -34,16 +34,13 @@ function SpotCreatePage() {
         if (!name) errors.name = 'Name is required';
         if (!price) errors.price = 'Price is required';
         if (!previewImage) errors.previewImage = 'Preview image is required'
-        if (images.some((image) => image && !isValidUrl(image))) errors.images = 'Image URL must end in .png, .jpg, or .jpeg';
+        if (images.some((image) => image && !isValidImageUrl(image))) errors.images = 'Image URL must end in .png, .jpg, or .jpeg';
     
         setErrors(errors);
         return Object.keys(errors).length === 0;
     }
 
-    const isValidUrl = (url) => {
-        const regex = /^(ftp|http|https):\/\/[^ "]+$/;
-        return regex.test(url);
-    }
+    const isValidImageUrl = (url) => /\.(png|jpe?g)$/i.test(url);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,8 +72,7 @@ function SpotCreatePage() {
         } else {
           console.error("Failed to create spot:", response);
         }
-      };
-    
+      };    
 
     return (
         <div>

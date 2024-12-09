@@ -37,9 +37,8 @@ function SpotPage() {
     const fetchSpot = async () => {
       try {
         const response = await fetch(`/api/spots/${spotId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch spot');
-        }
+        if (!response.ok) throw new Error('Failed to fetch spot');
+        
         const data = await response.json();
         setSpot(data);
         setReviews(data.Reviews || []);
@@ -53,7 +52,7 @@ function SpotPage() {
     fetchSpot();
   }, [spotId]);
 
-  const hasUserReviewed = reviews.some(review => review.User.id === user?.id);
+  const hasUserReviewed = reviews.some(review => review.User?.id === user?.id);
 
   const calculateAvgRating = () => {
     if (!reviews || reviews.length === 0) return 'New';
@@ -74,16 +73,16 @@ function SpotPage() {
 
   const handleEditClick = (review) => {
     setModalContent(
-        <UpdateReviewModal
-            review={review}
-            onUpdate={(updatedReview) => {
-                setReviews((prevReviews) =>
-                    prevReviews.map((r) => (r.id === updatedReview.id ? updatedReview : r))
-                );
-            }}
-        />
+      <UpdateReviewModal
+        review={review}
+        onUpdate={(updatedReview) => {
+          setReviews((prevReviews) =>
+            prevReviews.map((r) => (r.id === updatedReview.id ? updatedReview : r))
+          );
+        }}
+      />
     );
-};
+  };
 
   if (isLoading) {
     return <div>Loading spot...</div>;
@@ -100,46 +99,45 @@ function SpotPage() {
   const avgRating = calculateAvgRating();
 
   return (
-    <div className='spot-container'>
-      <h1 className='spot-header'>{spot.name}</h1>
-      <h3 className='location-header'>{spot.city}, {spot.state}, {spot.country}</h3>
+    <div className="spot-container">
+      <h1 className="spot-header">{spot.name}</h1>
+      <h3 className="location-header">{spot.city}, {spot.state}, {spot.country}</h3>
       <br />
-      <div className='image-container'>
-        <div className='preview-image-container'>
+      <div className="image-container">
+        <div className="preview-image-container">
           <img src={spot.previewImage} alt={spot.name} />
         </div>
-
-        <div className='image-grid'>
-          {spot.SpotImages.slice(1).map((image) => (
+        <div className="image-grid">
+          {spot.SpotImages?.slice(1).map((image) => (
             <img key={image.id} src={image.url} alt={`Image of ${spot.name}`} />
           ))}
         </div>
       </div>
 
-      <div className='spot-details-container'>
-        <div className='description-container'>
-          <h2 className='hosted'>
+      <div className="spot-details-container">
+        <div className="description-container">
+          <h2 className="hosted">
             Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}
           </h2>
           <p>{spot.description}</p>
         </div>
-        <div className='reserve-container'>
-          <div className='upper-res-container'>
-            <div className='spot-price-box'>
+        <div className="reserve-container">
+          <div className="upper-res-container">
+            <div className="spot-price-box">
               <p>${spot.price} / night</p>
             </div>
-            <div className='rating-reviews'>
+            <div className="rating-reviews">
               <GoldStar /> {avgRating}
               {reviews.length > 0 && (
                 <>
-                  <span className='small-period'> · </span>
+                  <span className="small-period"> · </span>
                   <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
                 </>
               )}
             </div>
           </div>
-          <div className='reserve-btn'>
-            <button type='button' onClick={() => alert('Feature coming soon')}>
+          <div className="reserve-btn">
+            <button type="button" onClick={() => alert('Feature coming soon')}>
               Reserve
             </button>
           </div>
@@ -150,49 +148,50 @@ function SpotPage() {
       <hr />
       <br />
 
-      <div className='reviews-container'>
-        <div className='reviews-header'>
+      <div className="reviews-container">
+        <div className="reviews-header">
           <GoldStar />
           <h3>{avgRating}</h3>
           {reviews.length > 0 && (
             <>
-              <span className='large-period'> · </span>
+              <span className="large-period"> · </span>
               <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
             </>
           )}
         </div>
-      {user && user.id !== spot.Owner.id && !hasUserReviewed && (
-          <div className='post-review-btn'>
-            <SpotReviewButton spot={spot} />
+        {user && user.id !== spot.Owner.id && !hasUserReviewed && (
+          <div className="post-review-btn">
+            <SpotReviewButton 
+            spot={spot} 
+            onNewReview={(newReview) => {
+                setReviews((prevReviews) => [newReview, ...prevReviews]);
+            }} 
+            />
           </div>
         )}
-      <br />
-      {reviews.length > 0 ? (
-        reviews.map((review) => (
-          <div key={review.id} className='review-card'>
-            <div className='reviewer'>
-              <div className='reviewer-stars'>
+        <br />
+        {reviews.filter((review) => review?.id).map((review) => (
+          <div key={review.id} className="review-card">
+            <div className="reviewer">
+              <div className="reviewer-stars">
                 <GoldStar /> {review.stars}
               </div>
-              <p>{review.User?.firstName}</p>
+              <p>{review.User?.firstName || 'Unknown User'}</p>
             </div>
-            <div className='review-date'>
+            <div className="review-date">
               <p>{formatDate(review.createdAt)}</p>
             </div>
-            <div className='review-text'>
+            <div className="review-text">
               <p>{review.review}</p>
             </div>
-            {user && user.id === review.User.id && (
-              <div className='review-actions'>
+            {user && user.id === review.User?.id && (
+              <div className="review-actions">
                 <button onClick={() => handleEditClick(review)}>Edit</button>
                 <button onClick={() => handleDelete(review.id)}>Delete</button>
               </div>
             )}
           </div>
-        ))
-      ) : (
-        user && user.id !== spot.Owner.id && <p>Be the first to post a review!</p>
-      )}
+        ))}
       </div>
     </div>
   );

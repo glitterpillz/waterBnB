@@ -1,11 +1,12 @@
 import OpenModalButton from '../Navigation/OpenModalButton';
 import ReviewFormModal from './SpotReviewModal';
 
-const SpotReviewButton = ({ spot }) => {
+const SpotReviewButton = ({ spot, onNewReview }) => {
     return (
         <OpenModalButton
-            modalComponent={<ReviewFormModal spot={spot} />}
-            buttonText='Post Your Review'
+            modalComponent={<ReviewFormModal spot={spot} onNewReview={onNewReview} />}
+            buttonText="Post Your Review"
+            className="post-review-button"
         />
     );
 };
