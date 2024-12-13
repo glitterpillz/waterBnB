@@ -33,19 +33,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [1, 500],
-          firstLetterCap(value) {
-            const array = value.split(" ");
-
-            if (isNaN(array[0])) {
-              throw new Error("Address must start with a number");
-            }
-
-            array.slice(1).forEach((val) => {
-              if (val[0] !== val[0].toUpperCase()) {
-                throw new Error("Address must be capitalized.");
-              }
-            });
-          },
         },
       },
       city: {
@@ -53,14 +40,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [1, 150],
-          firstLetterCap(value) {
-            const array = value.split(" ");
-            array.forEach((val) => {
-              if (val[0] !== val[0].toUpperCase()) {
-                throw new Error("City must be capitalized.");
-              }
-            });
-          },
         },
       },
       state: {
@@ -68,14 +47,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [1, 150],
-          firstLetterCap(value) {
-            const array = value.split(" ");
-            array.forEach((val) => {
-              if (val[0] !== val[0].toUpperCase()) {
-                throw new Error("State must be capitalized.");
-              }
-            });
-          },
         },
       },
       country: {
@@ -99,14 +70,6 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         validate: {
           len: [1, 150],
-          firstLetterCap(value) {
-            const array = value.split(" ");
-            array.forEach((val) => {
-              if (val[0] !== val[0].toUpperCase()) {
-                throw new Error("Location name must be capitalized.");
-              }
-            });
-          },
         },
       },
       description: {
