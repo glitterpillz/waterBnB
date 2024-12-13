@@ -97,6 +97,8 @@ function SpotPage() {
   }
 
   const avgRating = calculateAvgRating();
+  // const avgRating = spot.avgRating && spot.avgRating > 0 ? spot.avgRating : "New";
+
 
   return (
     <div className="spot-container">

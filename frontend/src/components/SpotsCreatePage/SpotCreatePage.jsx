@@ -50,27 +50,28 @@ function SpotCreatePage() {
         }
         
         const response = await csrfFetch("/api/spots/", {
-          method: "POST",
-          body: JSON.stringify({
-            country,
-            address,
-            city,
-            state,
-            lat,
-            lng,
-            name,
-            description,
-            price,
-            previewImage,
-            images
-          }),
+            method: "POST",
+            body: JSON.stringify({
+                country,
+                address,
+                city,
+                state,
+                lat,
+                lng,
+                name,
+                description,
+                price,
+                previewImage,
+                images
+            }),
         });
       
         if (response.ok) {
-          const data = await response.json();
-          navigate(`/spots/${data.id}`);
+            setErrors({});
+            const data = await response.json();
+            navigate(`/spots/${data.id}`);
         } else {
-          console.error("Failed to create spot:", response);
+            console.error("Failed to create spot:", response);
         }
       };    
 

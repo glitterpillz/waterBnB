@@ -72,6 +72,7 @@ img {
 .reserve-btn button:hover {
     background-color: pink;
     color: hotpink;
+    cursor: pointer;
 }
 
 .reserve-container {
@@ -143,6 +144,7 @@ img {
 .post-review-btn button:hover {
     color: hotpink;
     background-color: pink;
+    cursor: pointer;
 }
 
 .small-period {

@@ -6,21 +6,31 @@ function SpotDetails() {
   const [spots, setSpots] = useState([]);
   const [error, setError] = useState(null);
 
-  const calculateAvgRating = (reviews) => {
-    if (!reviews || reviews.length === 0) return 'New';
-    const totalStars = reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
-    return (totalStars / reviews.length).toFixed(1);
-  };
+  // const calculateAvgRating = (reviews) => {
+  //   if (!reviews || reviews.length === 0) return 'New';
+  //   const totalStars = reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
+  //   return (totalStars / reviews.length).toFixed(1);
+  // };
 
+  // const fetchSpots = useCallback(async () => {
+  //   try {
+  //     const response = await fetch('/api/spots');
+  //     const data = await response.json();
+  //     const spotsWithRatings = data.Spots.map((spot) => ({
+  //       ...spot,
+  //       avgRating: calculateAvgRating(spot.Reviews || []),
+  //     }));
+  //     setSpots(spotsWithRatings);
+  //   } catch (err) {
+  //     setError('Failed to load spots');
+  //     console.error(err);
+  //   }
+  // }, []);
   const fetchSpots = useCallback(async () => {
     try {
       const response = await fetch('/api/spots');
       const data = await response.json();
-      const spotsWithRatings = data.Spots.map((spot) => ({
-        ...spot,
-        avgRating: calculateAvgRating(spot.Reviews || []),
-      }));
-      setSpots(spotsWithRatings);
+      setSpots(data.Spots);
     } catch (err) {
       setError('Failed to load spots');
       console.error(err);
@@ -47,7 +57,7 @@ function SpotDetails() {
                   <div className="spot-location">
                     {spot.city}, {spot.state}
                   </div>
-                  <div className="spot-rating">⭐ {spot.avgRating || 'New'}</div>
+                  <div className="spot-rating">⭐ {(spot.avgRating > 0) ? spot.avgRating : 'New'}</div>
                 </div>
                 <div className="spot-price">${spot.price} night</div>
               </div>

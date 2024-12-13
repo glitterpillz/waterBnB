@@ -30,7 +30,19 @@ function UserSpotsPage() {
     }
 
     if (!userSpots.length) {
-        return <p>You have no spots yet.</p>;
+        return (
+            <div className='user-spots-container'>
+                <h1>Manage Your Spots</h1>
+                <h2>Bro has no spots 😔</h2>
+                <button 
+                    className='new-spot-btn' 
+                    type='button'
+                    onClick={() => navigate('/spots/new')}
+                >
+                    Create a New Spot
+                </button>
+            </div>
+        )
     }
 
     return (
@@ -59,7 +71,7 @@ function UserSpotsPage() {
                                             <div className='spot-location'>
                                                 {spot.city}, {spot.state}
                                             </div>
-                                            <div className='spot-rating'>⭐ {spot.rating}</div>
+                                            <div className='spot-rating'>⭐ {(spot.avgRating > 0) ? spot.avgRating : 'New'}</div>
                                         </div>
                                         <div className='spot-price'>${spot.price} night</div>
                                     </div>

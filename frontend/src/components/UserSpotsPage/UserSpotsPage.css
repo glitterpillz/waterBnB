@@ -51,6 +51,7 @@
     padding: 10px 20px 10px 20px;
     border: none;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .new-spot-btn:hover {

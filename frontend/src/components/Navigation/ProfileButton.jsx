@@ -2,7 +2,7 @@ import './ProfileButton.css';
 import * as sessionActions from '../../store/session';
 
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PiUserListBold } from "react-icons/pi";
 import { useNavigate, Link } from 'react-router-dom'
 
@@ -26,7 +26,7 @@ function ProfileButton({ user }) {
 
     const ulRef = useRef();
 
-    const userSpots = useSelector((state) => state.session.userSpots);
+    // const userSpots = useSelector((state) => state.session.userSpots);
 
     useEffect(() => {
         if (user) {
@@ -63,7 +63,7 @@ function ProfileButton({ user }) {
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
-    const hasSpots = userSpots && userSpots.length > 0;
+    // const hasSpots = userSpots && userSpots.length > 0;
 
     return (
         <div className="profile-btn-container">
@@ -79,15 +79,15 @@ function ProfileButton({ user }) {
                         <hr />
 
                         <li>
-                        {hasSpots ? (
+                        {/* {hasSpots ? ( */}
                             <Link className="manage-spots" to={"/user/spots"} onClick={closeMenu}>
                                 Manage Spots
                             </Link>
-                        ) : (
+                        {/* ) : (
                             <Link className="create-spot" to={"/spots/new"} onClick={closeMenu}>
                                 Create a New Spot
                             </Link>
-                        )}
+                        )} */}
                         </li>
 
                         <li>
