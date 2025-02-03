@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';  
 import { createReview } from '../../store/session'; 
+import { fetchSpotDetails } from '../../store/session';
 
 const ReviewFormModal = ({ spot }) => {
     const { closeModal } = useModal();
@@ -26,6 +27,7 @@ const ReviewFormModal = ({ spot }) => {
 
             if (response) {
                 closeModal();
+                dispatch(fetchSpotDetails(spotId))
             }
         } catch (err) {
             setErrors({ form: err.message || 'Failed to submit review. Please try again later.' });

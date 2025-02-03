@@ -3,11 +3,12 @@ import { csrfFetch } from "./csrf";
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 const SIGNUP_USER = 'users/signupUser';
+const GET_SPOT_DETAILS = 'session/getSpotDetails';
 const GET_USER_SPOTS = 'session/getUserSpots';
-const CREATE_USER_SPOT = 'session/createUserSpot'
-const DELETE_USER_SPOT = 'session/deleteSpot'
-const UPDATE_USER_SPOT = 'session/updateSpot'
-const GET_USER_REVIEWS = 'session/getUserReviews'
+const CREATE_USER_SPOT = 'session/createUserSpot';
+const DELETE_USER_SPOT = 'session/deleteSpot';
+const UPDATE_USER_SPOT = 'session/updateSpot';
+const GET_USER_REVIEWS = 'session/getUserReviews';
 const ADD_REVIEW = 'session/addReview';
 const DELETE_REVIEW = 'session/deleteReview';
 const UPDATE_REVIEW = 'session/updateReview';
@@ -24,6 +25,13 @@ const removeUser = () => {
         type: REMOVE_USER
     };
 };
+
+const setSpotDetails = (spot) => {
+    return {
+        type: GET_SPOT_DETAILS,
+        payload: spot
+    }
+}
 
 const setUserSpots = (spots) => {
     return {
@@ -130,6 +138,19 @@ export const logout = () => async (dispatch) => {
     dispatch(removeUser());
     return response;
 }
+
+export const fetchSpotDetails = (spotId) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/spots/${spotId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch spot details');
+        }
+        const data = await response.json();
+        dispatch(setSpotDetails(data));
+    } catch (error) {
+        console.error("Error fetching spot details:", error);
+    }
+};
 
 export const getUserSpots = () => async (dispatch) => {
     const response = await csrfFetch('/api/session/spots');
@@ -246,7 +267,8 @@ export const editReview = (reviewId, updatedReviewData) => async (dispatch) => {
 const initialState = { 
     user: null, 
     userSpots: [],
-    userReviews: []
+    userReviews: [],
+    spotDetails: null
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -257,6 +279,8 @@ const sessionReducer = (state = initialState, action) => {
             return { ...state, user: null };
         case SIGNUP_USER:
             return { ...state, user: action.payload };
+        case GET_SPOT_DETAILS:
+            return { ...state, spotDetails: action.payload }
         case GET_USER_SPOTS:
             return { ...state, userSpots: action.payload };
         case CREATE_USER_SPOT:
