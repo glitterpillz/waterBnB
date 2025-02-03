@@ -1,22 +1,19 @@
 import './SpotPage.css';
-
-import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar } from "react-icons/fa";
 import SpotReviewButton from '../SpotReviewModal/SpotReviewButton';
 import { useModal } from '../../context/Modal';
+import { fetchSpotDetails } from '../../store/session';
 import RemoveReviewModal from '../RemoveReviewModal/RemoveReviewModal';
 import UpdateReviewModal from '../UpdateReviewModal/UpdateReviewModal';
 
-
-const GoldStar = () => {
-  return (
-    <div style={{ color: 'gold' }}>
-      <FaStar />
-    </div>
-  );
-};
+const GoldStar = () => (
+  <div style={{ color: 'gold' }}>
+    <FaStar />
+  </div>
+);
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -25,48 +22,30 @@ const formatDate = (dateString) => {
 
 function SpotPage() {
   const { spotId } = useParams();
+  const dispatch = useDispatch();
   const { setModalContent } = useModal();
-  const [spot, setSpot] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [reviews, setReviews] = useState([]);
 
+  const spot = useSelector(state => state.session.spotDetails);
   const user = useSelector(state => state.session.user);
+  const isLoading = !spot;
 
   useEffect(() => {
-    const fetchSpot = async () => {
-      try {
-        const response = await fetch(`/api/spots/${spotId}`);
-        if (!response.ok) throw new Error('Failed to fetch spot');
-        
-        const data = await response.json();
-        setSpot(data);
-        setReviews(data.Reviews || []);
-      } catch (err) {
-        setError('Failed to load spot: ' + err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    dispatch(fetchSpotDetails(spotId));
+  }, [dispatch, spotId]);
 
-    fetchSpot();
-  }, [spotId]);
-
-  const hasUserReviewed = reviews.some(review => review.User?.id === user?.id);
+  const hasUserReviewed = spot?.Reviews?.some(review => review.User?.id === user?.id);
 
   const calculateAvgRating = () => {
-    if (!reviews || reviews.length === 0) return 'New';
-    const totalStars = reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
-    return (totalStars / reviews.length).toFixed(1);
+    if (!spot?.Reviews || spot.Reviews.length === 0) return 'New';
+    const totalStars = spot.Reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
+    return (totalStars / spot.Reviews.length).toFixed(1);
   };
 
   const handleDelete = (reviewId) => {
     setModalContent(
       <RemoveReviewModal
         reviewId={reviewId}
-        onDelete={(id) => {
-          setReviews((prevReviews) => prevReviews.filter((review) => review.id !== id));
-        }}
+        onDelete={() => dispatch(fetchSpotDetails(spotId))} 
       />
     );
   };
@@ -75,30 +54,16 @@ function SpotPage() {
     setModalContent(
       <UpdateReviewModal
         review={review}
-        onUpdate={(updatedReview) => {
-          setReviews((prevReviews) =>
-            prevReviews.map((r) => (r.id === updatedReview.id ? updatedReview : r))
-          );
-        }}
+        onUpdate={() => dispatch(fetchSpotDetails(spotId))}
       />
     );
   };
 
-  if (isLoading) {
-    return <div>Loading spot...</div>;
-  }
+  if (isLoading) return <div>Loading spot...</div>;
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!spot) {
-    return <div>No spot found for ID: {spotId}</div>;
-  }
+  if (!spot) return <div>No spot found for ID: {spotId}</div>;
 
   const avgRating = calculateAvgRating();
-  // const avgRating = spot.avgRating && spot.avgRating > 0 ? spot.avgRating : "New";
-
 
   return (
     <div className="spot-container">
@@ -130,10 +95,10 @@ function SpotPage() {
             </div>
             <div className="rating-reviews">
               <GoldStar /> {avgRating}
-              {reviews.length > 0 && (
+              {spot.Reviews.length > 0 && (
                 <>
                   <span className="small-period"> · </span>
-                  <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+                  <p>{spot.Reviews.length} {spot.Reviews.length === 1 ? 'Review' : 'Reviews'}</p>
                 </>
               )}
             </div>
@@ -154,26 +119,24 @@ function SpotPage() {
         <div className="reviews-header">
           <GoldStar />
           <h3>{avgRating}</h3>
-          {reviews.length > 0 && (
+          {spot.Reviews.length > 0 && (
             <>
               <span className="large-period"> · </span>
-              <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+              <p>{spot.Reviews.length} {spot.Reviews.length === 1 ? 'Review' : 'Reviews'}</p>
             </>
           )}
         </div>
         {user && user.id !== spot.Owner.id && !hasUserReviewed && (
           <div className="post-review-btn">
             <SpotReviewButton 
-            spot={spot} 
-            onNewReview={(newReview) => {
-                setReviews((prevReviews) => [newReview, ...prevReviews]);
-            }} 
+              spot={spot} 
+              onNewReview={() => dispatch(fetchSpotDetails(spotId))}
             />
           </div>
         )}
         <br />
         <div className='main-review-container'>
-          {reviews.filter((review) => review?.id).map((review) => (
+          {spot.Reviews.filter((review) => review?.id).map((review) => (
             <div key={review.id} className="review-card">
               <div className="reviewer">
                 <div className="reviewer-stars">
