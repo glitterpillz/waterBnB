@@ -172,28 +172,30 @@ function SpotPage() {
           </div>
         )}
         <br />
-        {reviews.filter((review) => review?.id).map((review) => (
-          <div key={review.id} className="review-card">
-            <div className="reviewer">
-              <div className="reviewer-stars">
-                <GoldStar /> {review.stars}
+        <div className='main-review-container'>
+          {reviews.filter((review) => review?.id).map((review) => (
+            <div key={review.id} className="review-card">
+              <div className="reviewer">
+                <div className="reviewer-stars">
+                  <GoldStar /> {review.stars}
+                </div>
+                <p>{review.User?.firstName || 'Unknown User'}</p>
               </div>
-              <p>{review.User?.firstName || 'Unknown User'}</p>
-            </div>
-            <div className="review-date">
-              <p>{formatDate(review.createdAt)}</p>
-            </div>
-            <div className="review-text">
-              <p>{review.review}</p>
-            </div>
-            {user && user.id === review.User?.id && (
-              <div className="review-actions">
-                <button onClick={() => handleEditClick(review)}>Edit</button>
-                <button onClick={() => handleDelete(review.id)}>Delete</button>
+              <div className="review-date">
+                <p>{formatDate(review.createdAt)}</p>
               </div>
-            )}
-          </div>
-        ))}
+              <div className="review-text">
+                <p>{review.review}</p>
+              </div>
+              {user && user.id === review.User?.id && (
+                <div className="review-actions">
+                  <button onClick={() => handleEditClick(review)}>Edit</button>
+                  <button onClick={() => handleDelete(review.id)}>Delete</button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

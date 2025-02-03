@@ -174,3 +174,8 @@ img {
     color: hotpink;
     background-color: pink;
 }
+
+.main-review-container {
+    display: flex;
+    flex-direction: column-reverse;
+}
