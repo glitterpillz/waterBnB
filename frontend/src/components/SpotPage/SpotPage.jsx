@@ -26,6 +26,7 @@ function SpotPage() {
   const { setModalContent } = useModal();
 
   const spot = useSelector(state => state.session.spotDetails);
+  const reviews = spot?.Reviews || [];
   const user = useSelector(state => state.session.user);
   const isLoading = !spot;
 
@@ -33,12 +34,12 @@ function SpotPage() {
     dispatch(fetchSpotDetails(spotId));
   }, [dispatch, spotId]);
 
-  const hasUserReviewed = spot?.Reviews?.some(review => review.User?.id === user?.id);
+  const hasUserReviewed = reviews?.some(review => review.User?.id === user?.id);
 
   const calculateAvgRating = () => {
-    if (!spot?.Reviews || spot.Reviews.length === 0) return 'New';
-    const totalStars = spot.Reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
-    return (totalStars / spot.Reviews.length).toFixed(1);
+    if (!reviews || reviews.length === 0) return 'New';
+    const totalStars = reviews.reduce((sum, review) => sum + (review.stars || 0), 0);
+    return (totalStars / reviews.length).toFixed(1);
   };
 
   const handleDelete = (reviewId) => {
@@ -64,6 +65,8 @@ function SpotPage() {
   if (!spot) return <div>No spot found for ID: {spotId}</div>;
 
   const avgRating = calculateAvgRating();
+
+  console.log("SPOT DETAILS WITH REVIEWS:", spot)
 
   return (
     <div className="spot-container">
@@ -95,10 +98,10 @@ function SpotPage() {
             </div>
             <div className="rating-reviews">
               <GoldStar /> {avgRating}
-              {spot.Reviews.length > 0 && (
+              {reviews.length > 0 && (
                 <>
                   <span className="small-period"> · </span>
-                  <p>{spot.Reviews.length} {spot.Reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+                  <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
                 </>
               )}
             </div>
@@ -119,10 +122,10 @@ function SpotPage() {
         <div className="reviews-header">
           <GoldStar />
           <h3>{avgRating}</h3>
-          {spot.Reviews.length > 0 && (
+          {reviews.length > 0 && (
             <>
               <span className="large-period"> · </span>
-              <p>{spot.Reviews.length} {spot.Reviews.length === 1 ? 'Review' : 'Reviews'}</p>
+              <p>{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</p>
             </>
           )}
         </div>
@@ -136,7 +139,7 @@ function SpotPage() {
         )}
         <br />
         <div className='main-review-container'>
-          {spot.Reviews.filter((review) => review?.id).map((review) => (
+          {reviews.filter((review) => review?.id).map((review) => (
             <div key={review.id} className="review-card">
               <div className="reviewer">
                 <div className="reviewer-stars">

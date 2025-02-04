@@ -251,24 +251,43 @@ export const removeReview = (reviewId, spotId) => async (dispatch) => {
 };
 
 export const editReview = (reviewId, updatedReviewData) => async (dispatch) => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
-        method: 'PUT',
-        body: JSON.stringify(updatedReviewData),
-    });
+    try {
+        const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedReviewData),
+        });
 
-    if (response.ok) {
-        const data = response.json();
-        dispatch(updateReview(data.Review));
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to update review');
+        }
+
+        const data = await response.json();
+        console.log("Updated Review Data:", data);
+
+        if (data.review && data.review.spotId) {
+            dispatch(updateReview(data.review)); 
+            dispatch(fetchSpotDetails(data.review.spotId)); 
+        } else {
+            throw new Error('spotId is missing in the response');
+        }
+
+        return data.review;
+    } catch (error) {
+        console.error('Error updating review:', error);
+        throw error;
     }
-
-    return response;
 };
+
 
 const initialState = { 
     user: null, 
     userSpots: [],
     userReviews: [],
-    spotDetails: null
+    spotDetails: null,
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -332,8 +351,14 @@ const sessionReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userReviews: state.userReviews.map((review) =>
-                action.payload && review.id === action.payload.id ? action.payload : review
+                    review.id === action.payload.id ? action.payload : review
                 ),
+                spotDetails: {
+                    ...state.spotDetails,
+                    Reviews: state.spotDetails.Reviews.map((review) =>
+                        review.id === action.payload.id ? action.payload : review
+                    ),
+                },
             };
         default:
             return state;

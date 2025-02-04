@@ -100,9 +100,19 @@ router.put(
     reviewToUpdate.review = review;
     reviewToUpdate.stars = stars;
 
-    return res.status(200).json(reviewToUpdate);
+    await reviewToUpdate.save();
+
+    const spot = await reviewToUpdate.getSpot();
+    
+    return res.status(200).json({
+      review: {
+        ...reviewToUpdate.toJSON(),
+        spotId: spot.id
+      }
+    });
   }
 );
+
 
 router.delete("/:reviewId", requireAuth, async (req, res) => {
   const userId = req.user.id;
