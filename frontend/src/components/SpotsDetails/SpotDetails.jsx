@@ -10,7 +10,7 @@ function SpotDetails() {
     try {
       const response = await fetch('/api/spots');
       const data = await response.json();
-      setSpots(data.Spots);
+      setSpots(data.Spots || []);
     } catch (err) {
       setError('Failed to load spots');
       console.error(err);
